@@ -1,25 +1,50 @@
 const User = require("../../models/user.model");
 const generateToken = require("../../utils/generateToken");
+const sendErrorResponse = require("../../utils/sendErrorResponse");
 
 exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
 
-  try {
-    const alreadySigned = await User.findOne({ email: email });
-    const alreadySignedUsername = await User.findOne({ username: username });
-    if (alreadySigned) {
-      return res.status(400).json({
-        error: "Email already signed up",
-        errorCode: "",
-      });
-    }
-    if (alreadySignedUsername) {
-      return res.status(400).json({
-        error: "Username already taken",
-        errorCode: "",
-      });
-    }
+  if (!username) {
+    return sendErrorResponse(
+      res,
+      "User name can not be empty.",
+      "MISSING_USERNAME"
+    );
+  }
 
+  if (!email) {
+    return sendErrorResponse(res, "Email can not be empty.", "MISSING_EMAIL");
+  }
+
+  if (!password) {
+    return sendErrorResponse(
+      res,
+      "Password can not be empty.",
+      "MISSING_PASSWORD"
+    );
+  }
+
+  const alreadySignedEmail = await User.findOne({ email: email });
+  const alreadySignedUsername = await User.findOne({ username: username });
+
+  if (alreadySignedEmail) {
+    return sendErrorResponse(
+      res,
+      "Email already exists.",
+      "EMAIL_ALREADY_EXISTS"
+    );
+  }
+
+  if (alreadySignedUsername) {
+    return sendErrorResponse(
+      res,
+      "Username already exists.",
+      "USERNAME_ALREADY_EXISTS"
+    );
+  }
+
+  try {
     const user = new User({
       username,
       email,
@@ -37,11 +62,11 @@ exports.signUp = async (req, res) => {
       message: "Registration Successful",
     });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({
-      error: true,
-      errorCode: "",
-      message: "Internal Server Error",
-    });
+    return sendErrorResponse(
+      res,
+      "Unexpected error at mongo save user.",
+      "UNEXPECTED_ERROR",
+      true
+    );
   }
 };
