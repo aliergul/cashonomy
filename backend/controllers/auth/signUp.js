@@ -25,23 +25,25 @@ exports.signUp = async (req, res) => {
     );
   }
 
-  const alreadySignedEmail = await User.findOne({ email: email });
-  const alreadySignedUsername = await User.findOne({ username: username });
+  const alreadySigned = await User.findOne({
+    $or: [{ email: email }, { username: username }],
+  });
 
-  if (alreadySignedEmail) {
-    return sendErrorResponse(
-      res,
-      "Email already exists.",
-      "EMAIL_ALREADY_EXISTS"
-    );
-  }
-
-  if (alreadySignedUsername) {
-    return sendErrorResponse(
-      res,
-      "Username already exists.",
-      "USERNAME_ALREADY_EXISTS"
-    );
+  if (alreadySigned) {
+    if (alreadySigned.email === email) {
+      return sendErrorResponse(
+        res,
+        "Email already exists.",
+        "EMAIL_ALREADY_EXISTS"
+      );
+    }
+    if (alreadySigned.username === username) {
+      return sendErrorResponse(
+        res,
+        "Username already exists.",
+        "USERNAME_ALREADY_EXISTS"
+      );
+    }
   }
 
   try {
