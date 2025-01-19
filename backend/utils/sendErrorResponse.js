@@ -18,3 +18,5 @@ const sendErrorResponse = (
     });
   }
 };
+
+module.exports = sendErrorResponse;
