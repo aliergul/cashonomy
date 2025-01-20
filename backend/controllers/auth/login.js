@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
         username: userInfo.username,
         email: userInfo.email,
       },
-      accessToken,
+      access_token: accessToken,
     });
   } catch (error) {
     return sendErrorResponse(
