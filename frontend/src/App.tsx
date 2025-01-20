@@ -1,7 +1,7 @@
 function App() {
   return (
     <>
-      <h1>Cashonomy</h1>
+      <span className="text-black">Cashonomy</span>
     </>
   );
 }
