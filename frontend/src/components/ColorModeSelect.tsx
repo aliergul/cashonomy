@@ -78,7 +78,7 @@ const ColorModeSelect: React.FC = () => {
               hover:bg-gray-200
               dark:hover:bg-gray-700
               px-2 py-1
-              transition
+              
             "
           >
             {theme === "dark" ? <DarkTheme /> : <LightTheme />}
@@ -86,6 +86,7 @@ const ColorModeSelect: React.FC = () => {
 
           {/* Options */}
           <ListboxOptions
+            transition
             className="
               absolute
               right-0
@@ -101,6 +102,7 @@ const ColorModeSelect: React.FC = () => {
               dark:border-dark_border
               dark:text-dark_text_primary
               overflow-hidden
+              origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0
             "
           >
             {/* Dark Option */}

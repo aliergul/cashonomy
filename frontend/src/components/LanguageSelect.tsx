@@ -63,6 +63,7 @@ const LanguageSelect: React.FC = () => {
             </span>
           </ListboxButton>
           <ListboxOptions
+            transition
             className="
                 absolute
                 right-0
@@ -78,6 +79,7 @@ const LanguageSelect: React.FC = () => {
                  dark:border-dark_border
                  dark:text-dark_text_primary
                 overflow-hidden
+                origin-top transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0
                     "
           >
             <ListboxOption
