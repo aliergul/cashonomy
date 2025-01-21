@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-dark {
+  background: hsla(212, 87%, 9%, 1);
+  background: radial-gradient(
+    circle,
+    hsla(212, 87%, 9%, 1) 0%,
+    hsla(218, 41%, 5%, 1) 91%
+  );
+  background: -moz-radial-gradient(
+    circle,
+    hsla(212, 87%, 9%, 1) 0%,
+    hsla(218, 41%, 5%, 1) 91%
+  );
+  background: -webkit-radial-gradient(
+    circle,
+    hsla(212, 87%, 9%, 1) 0%,
+    hsla(218, 41%, 5%, 1) 91%
+  );
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#03162B", endColorstr="#080C13", GradientType=1 );
+}
+
+.bg-light {
+  background: hsla(210, 88%, 97%, 1);
+
+  background: radial-gradient(
+    circle,
+    hsla(210, 88%, 97%, 1) 0%,
+    hsla(180, 100%, 100%, 1) 91%
+  );
+
+  background: -moz-radial-gradient(
+    circle,
+    hsla(210, 88%, 97%, 1) 0%,
+    hsla(180, 100%, 100%, 1) 91%
+  );
+
+  background: -webkit-radial-gradient(
+    circle,
+    hsla(210, 88%, 97%, 1) 0%,
+    hsla(180, 100%, 100%, 1) 91%
+  );
+
+  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F0F7FE", endColorstr="#FEFFFF", GradientType=1 );
+}

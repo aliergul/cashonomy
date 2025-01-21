@@ -3,6 +3,7 @@ import LoginForm from "../../components/Form/LoginForm";
 import SignUpForm from "../../components/Form/SignUpForm";
 import AuthContainer from "./AuthContainer";
 import Description from "./Description";
+import ColorModeSelect from "../../components/ColorModeSelect";
 
 const WelcomePage: React.FC = () => {
   const [authType, setAuthType] = React.useState<string>("login");
@@ -12,12 +13,10 @@ const WelcomePage: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-800 via-indigo-900 to-slate-900">
-      <div className="absolute left-0 top-0 h-full w-8/12 bg-gradient-to-br from-slate-800 via-indigo-800 to-slate-700"></div>
-      <div className="absolute right-0 top-0 h-full w-4/12 bg-gradient-to-br from-slate-800 via-indigo-900 to-slate-900"></div>
-
-      <div className="relative z-10 flex items-center justify-center min-h-screen text-white">
-        <div className="relative z-10 flex items-center justify-center space-y-8">
+    <div className="">
+      <ColorModeSelect />
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center space-y-8">
           <Description />
           <AuthContainer>
             {authType === "login" ? (

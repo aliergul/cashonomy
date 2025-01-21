@@ -1,4 +1,9 @@
 {
+  "theme": {
+    "system": "Sistem",
+    "light": "Açık",
+    "dark": "Koyu"
+  },
   "welcome_page": {
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Nullam in purus nec purus feugiat, molestie ipsum et, eleifend nunc.",
     "login": "Giriş Yap"

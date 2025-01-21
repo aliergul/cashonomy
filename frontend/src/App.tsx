@@ -7,7 +7,7 @@ import "./i18n/config";
 
 const App: React.FC = () => {
   return (
-    <>
+    <div className="min-h-screen bg-light-gradient dark:bg-dark-gradient">
       <Router>
         <Routes>
           {/* Public Routes */}
@@ -24,7 +24,7 @@ const App: React.FC = () => {
           />
         </Routes>
       </Router>
-    </>
+    </div>
   );
 };
 
