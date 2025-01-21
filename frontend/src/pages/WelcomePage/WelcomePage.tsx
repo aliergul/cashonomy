@@ -1,7 +1,6 @@
 import React from "react";
-import LoginForm from "../../components/Form/LoginForm";
-import SignUpForm from "../../components/Form/SignUpForm";
-import AuthContainer from "./AuthContainer";
+import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 import Description from "./Description";
 import ColorModeSelect from "../../components/ColorModeSelect";
 import LanguageSelect from "../../components/LanguageSelect";
@@ -20,7 +19,7 @@ const WelcomePage: React.FC = () => {
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex items-center justify-center space-y-8">
           <Description />
-          <div className="w-5/12 flex items-center justify-center  p-6 bg-white shadow rounded">
+          <div className="w-1/4 flex items-center justify-center  p-6 bg-light_bg dark:bg-dark_bg shadow rounded border border-light_border dark:border-dark_border">
             {authType === "login" ? (
               <LoginForm handleAuthType={handleAuthType} />
             ) : (
