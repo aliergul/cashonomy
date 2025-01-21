@@ -1,5 +1,11 @@
 {
-  "auth_form": {
+  "theme": {
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "welcome_page": {
+    "description": "ingilizceLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Nullam in purus nec purus feugiat, molestie ipsum et, eleifend nunc.",
     "login": "Login"
   }
 }

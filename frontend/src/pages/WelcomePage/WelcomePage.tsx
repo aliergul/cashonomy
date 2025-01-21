@@ -4,6 +4,7 @@ import SignUpForm from "../../components/Form/SignUpForm";
 import AuthContainer from "./AuthContainer";
 import Description from "./Description";
 import ColorModeSelect from "../../components/ColorModeSelect";
+import LanguageSelect from "../../components/LanguageSelect";
 
 const WelcomePage: React.FC = () => {
   const [authType, setAuthType] = React.useState<string>("login");
@@ -14,6 +15,7 @@ const WelcomePage: React.FC = () => {
 
   return (
     <div className="">
+      <LanguageSelect />
       <ColorModeSelect />
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex items-center justify-center space-y-8">
