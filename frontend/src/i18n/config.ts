@@ -7,7 +7,6 @@ export const getLang = () => i18next.language || "tr";
 
 i18next.use(initReactI18next).init({
   lng: localStorage.getItem("lang") || "tr",
-  debug: true,
   resources: {
     en,
     tr,

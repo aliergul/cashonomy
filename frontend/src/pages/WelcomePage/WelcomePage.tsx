@@ -20,13 +20,13 @@ const WelcomePage: React.FC = () => {
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex items-center justify-center space-y-8">
           <Description />
-          <AuthContainer>
+          <div className="w-5/12 flex items-center justify-center  p-6 bg-white shadow rounded">
             {authType === "login" ? (
               <LoginForm handleAuthType={handleAuthType} />
             ) : (
               <SignUpForm handleAuthType={handleAuthType} />
             )}
-          </AuthContainer>
+          </div>
         </div>
       </div>
     </div>
