@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 interface CustomButtonProps {
   title: string;
@@ -7,25 +7,40 @@ interface CustomButtonProps {
   customStyle?: string;
   icon?: JSX.Element;
   loading?: boolean;
+  isDisabled?: boolean;
+  customOnClick?: any;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   title,
   type = "button",
-  customStyle,
+  customStyle = "",
   icon,
   loading = false,
+  isDisabled = false,
+  customOnClick,
 }) => {
   return (
     <>
       <Button
         type={type}
-        loading={loading}
         variant="contained"
-        className={`${customStyle && customStyle}`}
+        disabled={isDisabled}
+        onClick={customOnClick && customOnClick}
+        className={`${
+          isDisabled
+            ? "opacity-70 cursor-not-allowed bg-gray-400 dark:bg-gray-600 text-gray-200"
+            : customStyle
+        }`}
       >
-        {icon && icon}
-        {title}
+        {loading ? (
+          <CircularProgress size={20} />
+        ) : (
+          <>
+            {icon && icon}
+            {title}
+          </>
+        )}
       </Button>
     </>
   );

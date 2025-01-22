@@ -14,7 +14,7 @@ const AuthFormField: React.FC<AuthFormFieldProps> = ({
   inputName,
   placeholder,
   type = "text",
-  value,
+  value = "",
   onChange,
 }) => {
   return (

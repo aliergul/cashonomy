@@ -1,4 +1,9 @@
 {
+  "errors": {
+    "network": "Bağlantı hatası! Lütfen daha sonra tekrar deneyin.",
+    "unexpected": "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "USER_NOT_FOUND": "Kullanıcı bulunamadı."
+  },
   "theme": {
     "system": "Sistem",
     "light": "Açık",

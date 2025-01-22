@@ -6,6 +6,9 @@ import { useState } from "react";
 import AuthFormType from "../../components/AuthForm/AuthFormType";
 import AuthFormLoginWith from "../../components/AuthForm/AuthFormLoginWith";
 import CustomButton from "../../components/CustomButton";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { postLogin } from "../../store/authSlice";
+import CustomErrorMessage from "../../components/CustomErrorMessage";
 
 interface LoginFormProps {
   handleAuthType: (type: string) => void;
@@ -13,8 +16,12 @@ interface LoginFormProps {
 
 const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const errorMessage = useAppSelector((state) => state.auth.errorMessage);
+  const loading = useAppSelector((state) => state.auth.isLoading);
+
   const [formValues, setFormValues] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -28,7 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form Submitted:", formValues);
+    dispatch(postLogin(formValues));
   };
 
   const dividerColor = () => {
@@ -40,6 +47,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
   };
   return (
     <div className="w-full flex flex-col gap-y-6 p-6">
+      <CustomErrorMessage error={errorMessage} />
       <AuthFormTitle title={t("welcome_page:login")} />
       <form
         onSubmit={handleSubmit}
@@ -47,10 +55,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
       >
         <AuthFormField
           label={t("welcome_page:username_login")}
-          inputName="email"
+          inputName="username"
           placeholder="email@email.com"
           type="text"
-          value={formValues.email}
+          value={formValues.username}
           onChange={handleChange}
         />
         <AuthFormField
@@ -64,6 +72,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
         <CustomButton
           title={t("welcome_page:login")}
           type="submit"
+          loading={loading}
           customStyle="mt-5 mb-2 transition-all opacity-100 hover:opacity-80 text-dark_text_primary bg-dark_bg dark:text-light_text_primary dark:bg-light_bg"
         />
         <AuthFormType

@@ -2,6 +2,14 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 //import { User } from "../types/User";
 import axios from "axios";
 import errorMessages from "../utils/errorMessages";
+import i18next from "i18next";
+
+const axiosInstance = axios.create({
+  baseURL: "http://localhost:8000", // Backend API
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 type LoginFormValues = {
   username: string;
@@ -29,8 +37,8 @@ type ResponseValues = {
 };
 
 const setAuthParams = async (data: any) => {
-  //const lang = i18n.language || "tr";
-  //localStorage.setItem("lang", lang);
+  const lang = i18next.language || "tr";
+  localStorage.setItem("lang", lang);
   localStorage.setItem("user", data);
   localStorage.setItem("accessToken", data.access_token);
   const user: any = { ...data };
@@ -46,7 +54,7 @@ export const postLogin = createAsyncThunk<
 >("auth/login", async (userData, { rejectWithValue }) => {
   const { username, password } = userData;
   try {
-    const response = await axios.post<LoginFormValues, ResponseValues>(
+    const response = await axiosInstance.post<LoginFormValues, ResponseValues>(
       "login",
       { username, password }
     );
@@ -58,7 +66,7 @@ export const postLogin = createAsyncThunk<
     // Use `err.response.data` as `action.payload` for a `rejected` action,
     // by explicitly returning it using the `rejectWithValue()` utility
     return rejectWithValue({
-      errorMessage: errorMessages(err.response, "login:errors"),
+      errorMessage: errorMessages(err.response),
     });
   }
 });
@@ -98,8 +106,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(postLogin.pending, (state, action) => {
-        console.log("action", action);
+      .addCase(postLogin.pending, (state) => {
         state.isLoading = true;
         state.errorMessage = null;
       })
