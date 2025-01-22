@@ -1,6 +1,6 @@
 import React from "react";
 
-interface AuthFormFieldProps {
+interface AuthFormInputFieldProps {
   label: string;
   inputName: string;
   placeholder: string;
@@ -9,7 +9,7 @@ interface AuthFormFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const AuthFormField: React.FC<AuthFormFieldProps> = ({
+const AuthFormInputField: React.FC<AuthFormInputFieldProps> = ({
   label,
   inputName,
   placeholder,
@@ -26,6 +26,7 @@ const AuthFormField: React.FC<AuthFormFieldProps> = ({
         {label}
       </label>
       <input
+        required
         type={type}
         name={inputName}
         placeholder={placeholder}
@@ -47,4 +48,4 @@ const AuthFormField: React.FC<AuthFormFieldProps> = ({
   );
 };
 
-export default AuthFormField;
+export default AuthFormInputField;

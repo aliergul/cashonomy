@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Divider } from "@mui/material";
 import AuthFormTitle from "../../components/AuthForm/AuthFormTitle";
-import AuthFormField from "../../components/AuthForm/AuthFormField";
+import AuthFormInputField from "../../components/AuthForm/AuthFormInputField";
 import { useState } from "react";
 import AuthFormType from "../../components/AuthForm/AuthFormType";
 import AuthFormLoginWith from "../../components/AuthForm/AuthFormLoginWith";
@@ -9,6 +9,7 @@ import CustomButton from "../../components/CustomButton";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { postLogin } from "../../store/authSlice";
 import CustomErrorMessage from "../../components/CustomErrorMessage";
+import AuthFormPasswordField from "../../components/AuthForm/AuthFormPasswordField";
 
 interface LoginFormProps {
   handleAuthType: (type: string) => void;
@@ -53,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
         onSubmit={handleSubmit}
         className="w-full flex flex-col bg-light_bg dark:bg-dark_bg"
       >
-        <AuthFormField
+        <AuthFormInputField
           label={t("welcome_page:username_login")}
           inputName="username"
           placeholder="email@email.com"
@@ -61,11 +62,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
           value={formValues.username}
           onChange={handleChange}
         />
-        <AuthFormField
-          label={t("welcome_page:password")}
-          inputName="password"
-          placeholder="******"
-          type="password"
+        <AuthFormPasswordField
           value={formValues.password}
           onChange={handleChange}
         />

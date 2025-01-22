@@ -29,7 +29,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         onClick={customOnClick && customOnClick}
         className={`${
           isDisabled
-            ? "opacity-70 cursor-not-allowed bg-gray-400 dark:bg-gray-600 text-gray-200"
+            ? "opacity-70 cursor-not-allowed bg-gray-400 dark:bg-gray-600 text-gray-200 w-full"
             : customStyle
         }`}
       >

@@ -16,12 +16,12 @@ const AuthFormLoginWith: React.FC<AuthFormLoginWithProps> = () => {
       <CustomButton
         title={t("welcome_page:login_with_google")}
         icon={<Google />}
-        customStyle="w-full flex items-center transition-all justify-center border dark:border-2 dark:border-solid border-dark_border gap-2 text-sm hover:opacity-100 opacity-70 text-light_text_primary bg-light_grey dark:text-dark_text_primary dark:bg-dark_bg_2"
+        customStyle="hover:cursor-not-allowed w-full flex items-center transition-all justify-center border dark:border-2 dark:border-solid border-dark_border gap-2 text-sm hover:opacity-100 opacity-70 text-light_text_primary bg-light_grey dark:text-dark_text_primary dark:bg-dark_bg_2"
       />
       <CustomButton
         title={t("welcome_page:login_with_facebook")}
         icon={<Facebook />}
-        customStyle="w-full flex items-center transition-all justify-center border dark:border-2 dark:border-solid border-dark_border gap-2 text-sm hover:opacity-100 opacity-70 text-light_text_primary bg-light_grey dark:text-dark_text_primary dark:bg-dark_bg_2"
+        customStyle="hover:cursor-not-allowed w-full flex items-center transition-all justify-center border dark:border-2 dark:border-solid border-dark_border gap-2 text-sm hover:opacity-100 opacity-70 text-light_text_primary bg-light_grey dark:text-dark_text_primary dark:bg-dark_bg_2"
       />
     </div>
   );

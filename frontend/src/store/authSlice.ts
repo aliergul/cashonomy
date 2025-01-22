@@ -39,9 +39,9 @@ type ResponseValues = {
 const setAuthParams = async (data: any) => {
   const lang = i18next.language || "tr";
   localStorage.setItem("lang", lang);
-  localStorage.setItem("user", data);
+  localStorage.setItem("user", JSON.stringify(data.user));
   localStorage.setItem("accessToken", data.access_token);
-  const user: any = { ...data };
+  const user: any = data.user;
 
   //login olduktan sonra user bilgilerini çekmek için halihazırda yazdığım fonksiyonları burada dispatch ile çalıştıracağım.
   return user;
@@ -63,8 +63,6 @@ export const postLogin = createAsyncThunk<
 
     return result as ResultValues;
   } catch (err: any) {
-    // Use `err.response.data` as `action.payload` for a `rejected` action,
-    // by explicitly returning it using the `rejectWithValue()` utility
     return rejectWithValue({
       errorMessage: errorMessages(err.response),
     });

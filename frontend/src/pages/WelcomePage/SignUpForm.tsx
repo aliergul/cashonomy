@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
 import AuthFormTitle from "../../components/AuthForm/AuthFormTitle";
 import { useState } from "react";
-import AuthFormField from "../../components/AuthForm/AuthFormField";
+import AuthFormField from "../../components/AuthForm/AuthFormInputField";
 import CustomButton from "../../components/CustomButton";
 import AuthFormType from "../../components/AuthForm/AuthFormType";
+import AuthFormPasswordField from "../../components/AuthForm/AuthFormPasswordField";
 
 interface SignUpFormProps {
   handleAuthType: (type: string) => void;
@@ -53,11 +54,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ handleAuthType }) => {
           value={formValues.email}
           onChange={handleChange}
         />
-        <AuthFormField
-          label={t("welcome_page:password")}
-          inputName="password"
-          placeholder="******"
-          type="password"
+        <AuthFormPasswordField
           value={formValues.password}
           onChange={handleChange}
         />
