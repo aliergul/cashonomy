@@ -13,19 +13,19 @@ const WelcomePage: React.FC = () => {
   };
 
   return (
-    <div className="">
-      <LanguageSelect />
-      <ColorModeSelect />
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex items-center justify-center space-y-8">
-          <Description />
-          <div className="w-1/4 flex items-center justify-center  p-6 bg-light_bg dark:bg-dark_bg shadow rounded border border-light_border dark:border-dark_border">
-            {authType === "login" ? (
-              <LoginForm handleAuthType={handleAuthType} />
-            ) : (
-              <SignUpForm handleAuthType={handleAuthType} />
-            )}
-          </div>
+    <div className="flex flex-col gap-y-20">
+      <div className="flex w-full justify-end p-5 gap-x-2">
+        <LanguageSelect />
+        <ColorModeSelect />
+      </div>
+      <div className="flex justify-center space-x-8">
+        <Description />
+        <div className="w-1/4 flex items-center justify-center bg-light_bg dark:bg-dark_bg shadow rounded border border-light_border dark:border-dark_border">
+          {authType === "login" ? (
+            <LoginForm handleAuthType={handleAuthType} />
+          ) : (
+            <SignUpForm handleAuthType={handleAuthType} />
+          )}
         </div>
       </div>
     </div>

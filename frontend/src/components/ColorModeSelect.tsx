@@ -48,9 +48,6 @@ const ColorModeSelect: React.FC = () => {
         flex
         items-center 
         justify-center 
-        fixed 
-        top-4 
-        right-4 
         rounded-lg 
         border-2 
         cursor-pointer 

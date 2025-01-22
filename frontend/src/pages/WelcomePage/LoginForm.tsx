@@ -39,7 +39,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
     }
   };
   return (
-    <div className="w-full flex flex-col gap-y-6">
+    <div className="w-full flex flex-col gap-y-6 p-6">
       <AuthFormTitle title={t("welcome_page:login")} />
       <form
         onSubmit={handleSubmit}

@@ -23,9 +23,6 @@ const LanguageSelect: React.FC = () => {
         flex
         items-center 
         justify-center 
-        fixed 
-        top-4
-        right-16 
         rounded-lg 
         border-2 
         cursor-pointer
