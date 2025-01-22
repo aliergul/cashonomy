@@ -16,13 +16,16 @@ type LoginFormValues = {
   password: string;
 };
 
+type SignUpFormValues = {
+  username: string;
+  email: string;
+  password: string;
+};
+
 type ResultValues = {
   id?: number;
-  access_token?: string;
   username?: string;
   email?: string;
-  inserttime?: number;
-  updatetime?: number;
 };
 
 type KnownError = {
@@ -69,9 +72,40 @@ export const postLogin = createAsyncThunk<
   }
 });
 
-// export const postLogout = createAsyncThunk("auth/logout", async () => {
-//   localStorage.clear();
-// });
+export const postSignUp = createAsyncThunk<
+  ResultValues,
+  SignUpFormValues,
+  { rejectValue: KnownError; error: object }
+>("auth/sign-up", async (userData, { rejectWithValue }) => {
+  const { username, email, password } = userData;
+  try {
+    const response = await axiosInstance.post<LoginFormValues, ResponseValues>(
+      "sign-up",
+      { username, email, password }
+    );
+    localStorage.clear();
+
+    const result = response.data;
+    return result as ResultValues;
+  } catch (err: any) {
+    return rejectWithValue({
+      errorMessage: errorMessages(err.response),
+    });
+  }
+});
+
+export const postLogout = createAsyncThunk(
+  "auth/logout",
+  async (_, { dispatch }) => {
+    try {
+      dispatch(logout());
+    } catch (err: any) {
+      return {
+        errorMessage: errorMessages(err.response),
+      };
+    }
+  }
+);
 
 // Define a type for the slice state
 interface AuthState {
@@ -79,6 +113,7 @@ interface AuthState {
   isLoggedIn: boolean;
   isLoading: boolean;
   errorMessage: string | null;
+  successMessage: string | null;
 }
 
 const initialState: AuthState = {
@@ -88,18 +123,23 @@ const initialState: AuthState = {
   isLoggedIn: localStorage.getItem("accessToken") ? true : false,
   isLoading: false,
   errorMessage: null,
+  successMessage: null,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
-    },
+    // burada mesela kullanıcıya ait incomes diye bir alan olacak setIncomes diye bir fonksiyon yazıp ilgili yerde dispatch edeceğim
+    // setUser: (state, action) => {
+    //   state.user = action.payload;
+    // },
     logout: (state) => {
       state.isLoggedIn = false;
       state.user = {};
+      state.errorMessage = null;
+      state.isLoading = false;
+      localStorage.clear();
     },
   },
   extraReducers: (builder) => {
@@ -120,19 +160,37 @@ export const authSlice = createSlice({
         } else if (action.error.message) {
           state.errorMessage = action.error.message;
         }
+      })
+      .addCase(postLogout.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(postLogout.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(postLogout.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(postSignUp.pending, (state) => {
+        state.isLoading = true;
+        state.errorMessage = null;
+      })
+      .addCase(postSignUp.fulfilled, (state) => {
+        state.isLoading = false;
+        state.successMessage = i18next.t("welcome_page:sign_up_success");
+        state.errorMessage = null;
+      })
+      .addCase(postSignUp.rejected, (state, action) => {
+        state.isLoading = false;
+        state.successMessage = null;
+        if (action.payload) {
+          state.errorMessage = action.payload.errorMessage;
+        } else if (action.error.message) {
+          state.errorMessage = action.error.message;
+        }
       });
-    //   .addCase(postLogout.pending, (state, action) => {
-    //     state.isLoading = true;
-    //   })
-    //   .addCase(postLogout.fulfilled, (state, action) => {
-    //     state.isLoading = false;
-    //   })
-    //   .addCase(postLogout.rejected, (state, action) => {
-    //     state.isLoading = false;
-    //   })
   },
 });
 
-export const { logout, setUser } = authSlice.actions;
+export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;

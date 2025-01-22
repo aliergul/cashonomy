@@ -4,7 +4,11 @@
     "unexpected": "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
     "USER_NOT_FOUND": "Kullanıcı bulunamadı.",
     "WRONG_PASSWORD": "Şifre hatalı! Lütfen tekrar deneyin.",
-    "MISSING_PASSWORD": "Şifre alanı boş bırakılamaz."
+    "MISSING_PASSWORD": "Şifre alanı boş bırakılamaz.",
+    "MISSING_USERNAME": "Kullanıcı adı alanı boş bırakılamaz.",
+    "MISSING_EMAIL": "E-posta alanı boş bırakılamaz.",
+    "EMAIL_ALREADY_EXISTS": "Bu e-posta adresi sistemde zaten kayıtlı!",
+    "USERNAME_ALREADY_EXISTS": "Bu kullanıcı adı sistemde zaten kayıtlı!"
   },
   "theme": {
     "system": "Sistem",
@@ -22,6 +26,10 @@
     "create_account": "Hesabın yok mu?",
     "already_have": "Hesabın var mı?",
     "login_with_google": "Google ile Giriş Yap",
-    "login_with_facebook": "Facebook ile Giriş Yap"
+    "login_with_facebook": "Facebook ile Giriş Yap",
+    "sign_up_success": "Kayıt başarılı! Şimdi giriş yapabilirsiniz."
+  },
+  "dashboard": {
+    "logout": "Çıkış Yap"
   }
 }
