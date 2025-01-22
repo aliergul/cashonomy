@@ -46,7 +46,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
         className="w-full flex flex-col bg-light_bg dark:bg-dark_bg"
       >
         <AuthFormField
-          label={t("welcome_page:username")}
+          label={t("welcome_page:username_login")}
           inputName="email"
           placeholder="email@email.com"
           type="text"

@@ -8,9 +8,12 @@
     "description": "türkçeLorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat, molestie ipsum et, eleifend nunc. Nullam in purus nec purus feugiat, molestie ipsum et, eleifend nunc.",
     "login": "Giriş Yap",
     "sign_up": "Kayıt Ol",
-    "username": "Kullanıcı adı veya E-posta",
+    "username": "Kullanıcı Adı",
+    "username_login": "Kullanıcı adı veya E-posta",
+    "email": "E-posta",
     "password": "Şifre",
     "create_account": "Hesabın yok mu?",
+    "already_have": "Hesabın var mı?",
     "login_with_google": "Google ile Giriş Yap",
     "login_with_facebook": "Facebook ile Giriş Yap"
   }
