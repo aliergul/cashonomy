@@ -6,7 +6,7 @@ import CustomButton from "../../components/CustomButton";
 import AuthFormType from "../../components/AuthForm/AuthFormType";
 import AuthFormPasswordField from "../../components/AuthForm/AuthFormPasswordField";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { postSignUp } from "../../store/authSlice";
+import { postSignUp, setErrorMessage } from "../../store/authSlice";
 import CustomSuccessMessage from "../../components/CustomSuccessMessage";
 import CustomErrorMessage from "../../components/CustomErrorMessage";
 
@@ -20,6 +20,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ handleAuthType }) => {
   const errorMessage = useAppSelector((state) => state.auth.errorMessage);
   const successMessage = useAppSelector((state) => state.auth.successMessage);
   const loading = useAppSelector((state) => state.auth.isLoading);
+  const [repeatPassword, setRepeatPassword] = useState("");
 
   const [formValues, setFormValues] = useState({
     username: "",
@@ -35,12 +36,22 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ handleAuthType }) => {
     }));
   };
 
+  const handleRepeatPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRepeatPassword(e.target.value);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(postSignUp(formValues));
+    if (repeatPassword !== formValues.password) {
+      dispatch(setErrorMessage(t("errors:repeat_password")));
+      return;
+    } else {
+      dispatch(postSignUp(formValues));
+    }
   };
 
   useEffect(() => {
+    dispatch(setErrorMessage(""));
     if (successMessage) {
       const timeout = setTimeout(() => {
         handleAuthType("login");
@@ -81,6 +92,11 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ handleAuthType }) => {
         <AuthFormPasswordField
           value={formValues.password}
           onChange={handleChange}
+        />
+        <AuthFormPasswordField
+          value={repeatPassword}
+          onChange={handleRepeatPassword}
+          title={t("welcome_page:repeat_password")}
         />
         <CustomButton
           title={t("welcome_page:sign_up")}

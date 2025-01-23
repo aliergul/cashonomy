@@ -6,11 +6,13 @@ import Eye from "../../assets/icons/Eye";
 interface AuthFormPasswordFieldProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  title?: string;
 }
 
 const AuthFormPasswordField: React.FC<AuthFormPasswordFieldProps> = ({
   value = "",
   onChange,
+  title = "",
 }) => {
   const { t } = useTranslation();
   const [type, setType] = useState("password");
@@ -32,7 +34,7 @@ const AuthFormPasswordField: React.FC<AuthFormPasswordFieldProps> = ({
         htmlFor="password"
         className="my-2 text-light_text_primary dark:text-dark_text_secondary"
       >
-        {t("welcome_page:password")}
+        {title ? title : t("welcome_page:password")}
       </label>
       <div className="relative">
         <input
@@ -40,7 +42,7 @@ const AuthFormPasswordField: React.FC<AuthFormPasswordFieldProps> = ({
           type={type}
           name="password"
           placeholder="******"
-          value={value}
+          value={value.trim()}
           onChange={onChange}
           className="p-2 transition-all rounded border w-full
         border-light_border 

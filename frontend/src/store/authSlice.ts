@@ -114,6 +114,7 @@ interface AuthState {
   isLoading: boolean;
   errorMessage: string | null;
   successMessage: string | null;
+  theme: string | null;
 }
 
 const initialState: AuthState = {
@@ -124,6 +125,7 @@ const initialState: AuthState = {
   isLoading: false,
   errorMessage: null,
   successMessage: null,
+  theme: null,
 };
 
 export const authSlice = createSlice({
@@ -140,6 +142,12 @@ export const authSlice = createSlice({
       state.errorMessage = null;
       state.isLoading = false;
       localStorage.clear();
+    },
+    setErrorMessage: (state, action) => {
+      state.errorMessage = action.payload;
+    },
+    setTheme: (state, action) => {
+      state.theme = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -191,6 +199,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setErrorMessage, setTheme } = authSlice.actions;
 
 export default authSlice.reducer;

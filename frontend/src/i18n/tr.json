@@ -2,6 +2,7 @@
   "errors": {
     "network": "Bağlantı hatası! Lütfen daha sonra tekrar deneyin.",
     "unexpected": "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "repeat_password": "Şifreler birbirleri ile uyuşmuyor!",
     "USER_NOT_FOUND": "Kullanıcı bulunamadı.",
     "WRONG_PASSWORD": "Şifre hatalı! Lütfen tekrar deneyin.",
     "MISSING_PASSWORD": "Şifre alanı boş bırakılamaz.",
@@ -23,6 +24,7 @@
     "username_login": "Kullanıcı adı veya E-posta",
     "email": "E-posta",
     "password": "Şifre",
+    "repeat_password": "Şifre Tekrarı",
     "create_account": "Hesabın yok mu?",
     "already_have": "Hesabın var mı?",
     "login_with_google": "Google ile Giriş Yap",

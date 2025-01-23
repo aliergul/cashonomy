@@ -2,12 +2,12 @@ import { useTranslation } from "react-i18next";
 import { Divider } from "@mui/material";
 import AuthFormTitle from "../../components/AuthForm/AuthFormTitle";
 import AuthFormInputField from "../../components/AuthForm/AuthFormInputField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthFormType from "../../components/AuthForm/AuthFormType";
 import AuthFormLoginWith from "../../components/AuthForm/AuthFormLoginWith";
 import CustomButton from "../../components/CustomButton";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { postLogin } from "../../store/authSlice";
+import { postLogin, setErrorMessage } from "../../store/authSlice";
 import CustomErrorMessage from "../../components/CustomErrorMessage";
 import AuthFormPasswordField from "../../components/AuthForm/AuthFormPasswordField";
 
@@ -46,6 +46,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
       return "#9ba1b0";
     }
   };
+
+  useEffect(() => {
+    dispatch(setErrorMessage(""));
+  }, []); //eslint-disable-line
+
   return (
     <div className="w-full flex flex-col gap-y-6 p-6">
       <CustomErrorMessage error={errorMessage} />

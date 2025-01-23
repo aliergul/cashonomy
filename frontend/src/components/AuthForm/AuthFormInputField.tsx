@@ -30,7 +30,7 @@ const AuthFormInputField: React.FC<AuthFormInputFieldProps> = ({
         type={type}
         name={inputName}
         placeholder={placeholder}
-        value={value}
+        value={value.trim()}
         onChange={onChange}
         className="p-2 transition-all rounded border
         border-light_border 

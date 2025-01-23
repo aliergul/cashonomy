@@ -9,16 +9,19 @@ import {
   ListboxOptions,
 } from "@headlessui/react";
 import { useTranslation } from "react-i18next";
+import { useAppDispatch } from "../store";
+import { setTheme } from "../store/authSlice";
 
 const ColorModeSelect: React.FC = () => {
   const { t } = useTranslation();
   const systemTheme = useColorScheme();
-  const [theme, setTheme] = useState(
+  const dispatch = useAppDispatch();
+  const [themeMode, setThemeMode] = useState(
     localStorage.getItem("theme") || systemTheme
   );
 
   const toggleTheme = (mode: string) => {
-    setTheme(mode);
+    setThemeMode(mode);
     if (mode === "light") {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
@@ -32,15 +35,17 @@ const ColorModeSelect: React.FC = () => {
 
   useEffect(() => {
     if (
-      theme === "dark" ||
+      themeMode === "dark" ||
       (!("theme" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       document.documentElement.classList.add("dark");
+      dispatch(setTheme("dark"));
     } else {
       document.documentElement.classList.remove("dark");
+      dispatch(setTheme("light"));
     }
-  }, [theme]);
+  }, [themeMode]); //eslint-disable-line
 
   return (
     <div
@@ -59,7 +64,7 @@ const ColorModeSelect: React.FC = () => {
         dark:hover:bg-opacity-5
       "
     >
-      <Listbox value={theme} onChange={toggleTheme}>
+      <Listbox value={themeMode} onChange={toggleTheme}>
         <div className="relative">
           {/* Button */}
           <ListboxButton
@@ -78,7 +83,7 @@ const ColorModeSelect: React.FC = () => {
               
             "
           >
-            {theme === "dark" ? <DarkTheme /> : <LightTheme />}
+            {themeMode === "dark" ? <DarkTheme /> : <LightTheme />}
           </ListboxButton>
 
           {/* Options */}
