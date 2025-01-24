@@ -25,12 +25,12 @@ exports.googleAuth = async (req, res) => {
     const userId = payload["sub"];
     const accessToken = generateToken(userId);
 
-    res
+    return res
       .status(200)
       .cookie("token", accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production", // Set to true in production when using HTTPS
-        maxAge: 3600000, // 1 hour in milliseconds
+        maxAge: 3600000, // 1 hour in milliseconds,
       })
       .json({
         error: false,
@@ -42,8 +42,7 @@ exports.googleAuth = async (req, res) => {
     return sendErrorResponse(
       res,
       "Unexpected error at google authentication.",
-      "GOOGLE_UNEXPECTED_ERROR",
-      true
+      "GOOGLE_UNEXPECTED_ERROR"
     );
   }
 };

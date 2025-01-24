@@ -11,6 +11,10 @@ const axiosInstance = axios.create({
   },
 });
 
+type oauthValues = {
+  credential: string;
+};
+
 type LoginFormValues = {
   username: string;
   password: string;
@@ -49,6 +53,28 @@ const setAuthParams = async (data: any) => {
   //login olduktan sonra user bilgilerini çekmek için halihazırda yazdığım fonksiyonları burada dispatch ile çalıştıracağım.
   return user;
 };
+
+export const postOauth = createAsyncThunk<
+  ResultValues,
+  oauthValues,
+  { rejectValue: KnownError; error: object }
+>("auth/google-auth", async (credentialData, { rejectWithValue }) => {
+  const { credential } = credentialData;
+  try {
+    const response = await axiosInstance.post<oauthValues, ResponseValues>(
+      "google-auth",
+      { credential }
+    );
+    localStorage.clear();
+    const result = await setAuthParams(response.data);
+
+    return result as ResultValues;
+  } catch (err: any) {
+    return rejectWithValue({
+      errorMessage: errorMessages(err.response),
+    });
+  }
+});
 
 export const postLogin = createAsyncThunk<
   ResultValues,
