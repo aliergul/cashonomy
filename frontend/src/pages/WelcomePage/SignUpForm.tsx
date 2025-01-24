@@ -1,14 +1,14 @@
 import { useTranslation } from "react-i18next";
 import AuthFormTitle from "../../components/AuthForm/AuthFormTitle";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AuthFormField from "../../components/AuthForm/AuthFormInputField";
 import CustomButton from "../../components/CustomButton";
 import AuthFormType from "../../components/AuthForm/AuthFormType";
 import AuthFormPasswordField from "../../components/AuthForm/AuthFormPasswordField";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { postSignUp, setErrorMessage } from "../../store/authSlice";
-import CustomSuccessMessage from "../../components/CustomSuccessMessage";
 import CustomErrorMessage from "../../components/CustomErrorMessage";
+import useSnackbar from "../../components/Snackbar/useSnackbar";
 
 interface SignUpFormProps {
   handleAuthType: (type: string) => void;
@@ -17,8 +17,8 @@ interface SignUpFormProps {
 const SignUpForm: React.FC<SignUpFormProps> = ({ handleAuthType }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const addSnackbar = useSnackbar();
   const errorMessage = useAppSelector((state) => state.auth.errorMessage);
-  const successMessage = useAppSelector((state) => state.auth.successMessage);
   const loading = useAppSelector((state) => state.auth.isLoading);
   const [repeatPassword, setRepeatPassword] = useState("");
 
@@ -46,28 +46,30 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ handleAuthType }) => {
       dispatch(setErrorMessage(t("errors:repeat_password")));
       return;
     } else {
-      dispatch(postSignUp(formValues));
+      handleSignUp(formValues);
     }
   };
 
-  useEffect(() => {
-    dispatch(setErrorMessage(""));
-    if (successMessage) {
+  const handleSignUp = async (formValues: any) => {
+    const resultAction = await dispatch(postSignUp(formValues));
+
+    if (postSignUp.fulfilled.match(resultAction)) {
+      addSnackbar(t("welcome_page:sign_up_success"));
+      dispatch(setErrorMessage(""));
+
       const timeout = setTimeout(() => {
         handleAuthType("login");
-        location.reload();
       }, 1000);
 
       return () => {
         clearTimeout(timeout);
       };
     }
-  }, [successMessage]); //eslint-disable-line
+  };
 
   return (
     <div className="w-full flex flex-col gap-y-6 p-6">
       <CustomErrorMessage error={errorMessage} />
-      <CustomSuccessMessage message={successMessage} />
       <AuthFormTitle title={t("welcome_page:login")} />
       <form
         onSubmit={handleSubmit}

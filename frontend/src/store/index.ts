@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import authSlice, { logout } from "./authSlice";
+import snackbarSlice from "../components/Snackbar/SnackbarSlice";
 import { authApi } from "./authApi";
 
 const reducers = combineReducers({
   auth: authSlice,
+  snackbars: snackbarSlice,
   [authApi.reducerPath]: authApi.reducer,
 });
 
