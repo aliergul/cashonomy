@@ -5,10 +5,15 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    username: { type: String, required: true, unique: true },
+    username: { type: String, required: false, unique: true },
     email: { type: String, required: true, unique: true },
     encrypted_password: { type: String, required: true },
     salt: String,
+    authSource: {
+      type: String,
+      enum: ["self", "google"],
+      default: "self",
+    },
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
