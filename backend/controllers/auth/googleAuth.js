@@ -3,21 +3,22 @@ const User = require("../../models/user.model");
 const sendErrorResponse = require("../../utils/sendErrorResponse");
 
 exports.googleAuth = async (req, res) => {
-  const client = new OAuth2Client();
-  const { credential, clientId } = req.body;
+  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  const { credential } = req.body;
 
   try {
     const ticket = await client.verifyIdToken({
       idToken: credential,
-      audience: clientId,
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
     const payload = ticket.getPayload();
-    const { email } = payload;
+    const { email, name } = payload;
     let user = await User.findOne({ email });
     if (!user) {
       // Create a new user if they don't exist
       user = await User.create({
         email,
+        username: name || email.split("@")[0],
         authSource: "google",
       });
     }
@@ -28,7 +29,7 @@ exports.googleAuth = async (req, res) => {
       .status(200)
       .cookie("token", accessToken, {
         httpOnly: true,
-        secure: false, // Set to true in production when using HTTPS
+        secure: process.env.NODE_ENV === "production", // Set to true in production when using HTTPS
         maxAge: 3600000, // 1 hour in milliseconds
       })
       .json({

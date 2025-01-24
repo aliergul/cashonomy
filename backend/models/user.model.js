@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    username: { type: String, required: false, unique: true },
+    username: { type: String, unique: true },
     email: { type: String, required: true, unique: true },
-    encrypted_password: { type: String, required: true },
+    encrypted_password: { type: String },
     salt: String,
     authSource: {
       type: String,
