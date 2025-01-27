@@ -22,6 +22,7 @@ const ColorModeSelect: React.FC = () => {
 
   const toggleTheme = (mode: string) => {
     setThemeMode(mode);
+    dispatch(setTheme(mode));
     if (mode === "light") {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
@@ -34,6 +35,7 @@ const ColorModeSelect: React.FC = () => {
   };
 
   useEffect(() => {
+    console.log("themeMode", themeMode);
     if (
       themeMode === "dark" ||
       (!("theme" in localStorage) &&
