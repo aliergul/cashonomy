@@ -1,10 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { Divider } from "@mui/material";
+//import { Divider } from "@mui/material";
 import AuthFormTitle from "../../components/AuthForm/AuthFormTitle";
 import AuthFormInputField from "../../components/AuthForm/AuthFormInputField";
 import { useEffect, useState } from "react";
 import AuthFormType from "../../components/AuthForm/AuthFormType";
-import AuthFormLoginWith from "../../components/AuthForm/AuthFormLoginWith";
+//import AuthFormLoginWith from "../../components/AuthForm/AuthFormLoginWith";
 import CustomButton from "../../components/CustomButton";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { postLogin, setErrorMessage } from "../../store/authSlice";
@@ -39,13 +39,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
     dispatch(postLogin(formValues));
   };
 
-  const dividerColor = () => {
-    if (localStorage.getItem("theme") === "dark") {
-      return "#8791a5";
-    } else {
-      return "#9ba1b0";
-    }
-  };
+  // const dividerColor = () => {
+  //   if (localStorage.getItem("theme") === "dark") {
+  //     return "#8791a5";
+  //   } else {
+  //     return "#9ba1b0";
+  //   }
+  // };
 
   useEffect(() => {
     dispatch(setErrorMessage(""));
@@ -83,7 +83,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
           onClick={() => handleAuthType("sign_up")}
         />
 
-        <Divider
+        {/* <Divider
           sx={{
             my: 2,
             "&::before, &::after": {
@@ -93,9 +93,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleAuthType }) => {
           className="text-light_text_secondary dark:text-dark_text_secondary"
         >
           or
-        </Divider>
+        </Divider> */}
       </form>
-      <AuthFormLoginWith />
+      {/* <AuthFormLoginWith /> */}
     </div>
   );
 };

@@ -11,9 +11,9 @@ const axiosInstance = axios.create({
   },
 });
 
-type oauthValues = {
-  credential: string;
-};
+// type oauthValues = {
+//   credential: string;
+// };
 
 type LoginFormValues = {
   username: string;
@@ -54,27 +54,27 @@ const setAuthParams = async (data: any) => {
   return user;
 };
 
-export const postOauth = createAsyncThunk<
-  ResultValues,
-  oauthValues,
-  { rejectValue: KnownError; error: object }
->("auth/google-auth", async (credentialData, { rejectWithValue }) => {
-  const { credential } = credentialData;
-  try {
-    const response = await axiosInstance.post<oauthValues, ResponseValues>(
-      "google-auth",
-      { credential }
-    );
-    localStorage.clear();
-    const result = await setAuthParams(response.data);
+// export const postOauth = createAsyncThunk<
+//   ResultValues,
+//   oauthValues,
+//   { rejectValue: KnownError; error: object }
+// >("auth/google-auth", async (credentialData, { rejectWithValue }) => {
+//   const credential = credentialData;
+//   try {
+//     const response = await axiosInstance.post<oauthValues, ResponseValues>(
+//       "google-auth",
+//       { token: credential }
+//     );
+//     localStorage.clear();
+//     const result = await setAuthParams(response.data);
 
-    return result as ResultValues;
-  } catch (err: any) {
-    return rejectWithValue({
-      errorMessage: errorMessages(err.response),
-    });
-  }
-});
+//     return result as ResultValues;
+//   } catch (err: any) {
+//     return rejectWithValue({
+//       errorMessage: errorMessages(err.response),
+//     });
+//   }
+// });
 
 export const postLogin = createAsyncThunk<
   ResultValues,

@@ -3,9 +3,10 @@ import Google from "../../assets/icons/Google";
 import Facebook from "../../assets/icons/Facebook";
 import CustomButton from "../CustomButton";
 import { useTranslation } from "react-i18next";
-import { GoogleLogin } from "@react-oauth/google";
-import { useAppDispatch } from "../../store";
-import { postOauth, setErrorMessage } from "../../store/authSlice";
+//import { GoogleLogin } from "@react-oauth/google";
+//import { useAppDispatch } from "../../store";
+//import { postOauth, setErrorMessage } from "../../store/authSlice";
+//import { jwtDecode } from "jwt-decode";
 
 interface AuthFormLoginWithProps {
   title?: string;
@@ -13,21 +14,21 @@ interface AuthFormLoginWithProps {
 
 const AuthFormLoginWith: React.FC<AuthFormLoginWithProps> = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
+  //const dispatch = useAppDispatch();
 
-  const handleGoogleSuccess = (credentialResponse: any) => {
-    console.log("credentialResponse", credentialResponse);
-    dispatch(postOauth(credentialResponse.credential));
-  };
-  const handleGoogleError = () => {
-    dispatch(setErrorMessage(t("errors:google_auth_failed")));
-  };
+  // const handleGoogleSuccess = (credentialResponse: any) => {
+  //   dispatch(postOauth(jwtDecode(credentialResponse.credential)));
+  // };
+  // const handleGoogleError = () => {
+  //   dispatch(setErrorMessage(t("errors:google_auth_failed")));
+  // };
+
   return (
     <div className="space-y-3">
-      <GoogleLogin
+      {/* <GoogleLogin
         onSuccess={handleGoogleSuccess}
         onError={handleGoogleError}
-      />
+      /> */}
       <CustomButton
         title={t("welcome_page:login_with_google")}
         icon={<Google />}

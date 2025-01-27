@@ -23,13 +23,13 @@ exports.googleAuth = async (req, res) => {
       });
     }
     const userId = payload["sub"];
-    const accessToken = generateToken(userId);
+    const accessToken = generateToken(user._id);
 
     return res
       .status(200)
       .cookie("token", accessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Set to true in production when using HTTPS
+        secure: false, // Set to true in production when using HTTPS
         maxAge: 3600000, // 1 hour in milliseconds,
       })
       .json({
