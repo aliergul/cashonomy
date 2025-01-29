@@ -41,6 +41,7 @@ const AuthFormPasswordField: React.FC<AuthFormPasswordFieldProps> = ({
           required
           type={type}
           name="password"
+          autoComplete="new-password"
           placeholder="******"
           value={value.trim()}
           onChange={onChange}

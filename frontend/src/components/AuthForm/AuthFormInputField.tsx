@@ -32,6 +32,7 @@ const AuthFormInputField: React.FC<AuthFormInputFieldProps> = ({
         placeholder={placeholder}
         value={value.trim()}
         onChange={onChange}
+        autoComplete="off"
         className="p-2 transition-all rounded border
         border-light_border 
         hover:border-light_text_primary

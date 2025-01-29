@@ -9,11 +9,11 @@ const userSchema = new Schema(
     email: { type: String, required: true, unique: true },
     encrypted_password: { type: String },
     salt: String,
-    authSource: {
-      type: String,
-      enum: ["self", "google"],
-      default: "self",
-    },
+    // authSource: {
+    //   type: String,
+    //   enum: ["self", "google"],
+    //   default: "self",
+    // },
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
