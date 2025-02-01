@@ -26,8 +26,7 @@ exports.signUp = async (req, res) => {
     return sendErrorResponse(
       res,
       "Unexpected error at mongo save user.",
-      "UNEXPECTED_ERROR",
-      true
+      "UNEXPECTED_ERROR"
     );
   }
 };

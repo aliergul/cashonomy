@@ -10,8 +10,8 @@ const recordSchema = new Schema(
     amount: { type: Number, required: true },
     currency: { type: String, enum: ["TL", "USD", "EUR"], required: true },
     status: { type: Boolean, required: true },
-    dueDate: { type: Date, required: false },
-    transactionDate: { type: Date, required: false },
+    dueDate: { type: Number, required: false },
+    transactionDate: { type: Number, required: false },
     installment: { type: Boolean, required: true },
     installmentCount: {
       type: Number,

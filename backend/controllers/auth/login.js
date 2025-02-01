@@ -42,8 +42,7 @@ exports.login = async (req, res) => {
     return sendErrorResponse(
       res,
       "Unexpected error during login.",
-      "UNEXPECTED_ERROR",
-      true
+      "UNEXPECTED_ERROR"
     );
   }
 };
