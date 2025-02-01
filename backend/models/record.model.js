@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Tag = require("./tag.model");
 
 const recordSchema = new Schema(
   {
@@ -19,9 +18,10 @@ const recordSchema = new Schema(
       required: function () {
         return this.installment === true;
       },
+      default: 0,
     },
     count: { type: Number, required: true, default: 1 },
-    tags: { type: Array[Tag], default: [] },
+    tags: [{ type: Schema.Types.ObjectId, ref: "Tag", required: false }],
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );

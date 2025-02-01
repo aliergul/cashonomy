@@ -10,6 +10,7 @@ const app = express();
 
 // Routes
 const authRoutes = require("./routes/authRoutes");
+const recordRoutes = require("./routes/recordRoutes");
 
 app.use(express.json());
 
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(authRoutes);
+app.use(recordRoutes);
 
 app.listen(8000);
 
