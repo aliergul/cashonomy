@@ -1,14 +1,10 @@
 const User = require("../../models/user.model");
 const sendErrorResponse = require("../../utils/sendErrorResponse");
 const generateToken = require("../../utils/generateToken");
-//const sendWelcomeEmail = require("../email/sendWelcomeEmail");
+// const sendWelcomeEmail = require("../email/sendWelcomeEmail");
 
 exports.login = async (req, res) => {
   const { username, password } = req.body;
-
-  if (!password) {
-    return sendErrorResponse(res, "Password is required", "MISSING_PASSWORD");
-  }
 
   try {
     const userInfo = await User.findOne({
@@ -30,7 +26,7 @@ exports.login = async (req, res) => {
     }
 
     const accessToken = generateToken(userInfo._id);
-    //await sendWelcomeEmail(userInfo.email);
+    // await sendWelcomeEmail(userInfo.email);
 
     return res.status(200).json({
       error: false,
