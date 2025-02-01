@@ -5,9 +5,9 @@ const sendErrorResponse = require("../utils/sendErrorResponse");
 const validateLogin = [
   body("username")
     .notEmpty()
-    .withMessage("MISSING_USERNAME")
+    .withMessage("MISSING_USERNAME_LOGIN")
     .isString()
-    .withMessage("INVALID_USERNAME"),
+    .withMessage("INVALID_USERNAME_LOGIN"),
   body("password").notEmpty().withMessage("MISSING_PASSWORD"),
 
   (req, res, next) => {

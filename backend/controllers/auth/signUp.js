@@ -5,47 +5,6 @@ const sendErrorResponse = require("../../utils/sendErrorResponse");
 exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
 
-  if (!username) {
-    return sendErrorResponse(
-      res,
-      "User name can not be empty.",
-      "MISSING_USERNAME"
-    );
-  }
-
-  if (!email) {
-    return sendErrorResponse(res, "Email can not be empty.", "MISSING_EMAIL");
-  }
-
-  if (!password) {
-    return sendErrorResponse(
-      res,
-      "Password can not be empty.",
-      "MISSING_PASSWORD"
-    );
-  }
-
-  const alreadySigned = await User.findOne({
-    $or: [{ email: email }, { username: username }],
-  });
-
-  if (alreadySigned) {
-    if (alreadySigned.email === email) {
-      return sendErrorResponse(
-        res,
-        "Email already exists.",
-        "EMAIL_ALREADY_EXISTS"
-      );
-    }
-    if (alreadySigned.username === username) {
-      return sendErrorResponse(
-        res,
-        "Username already exists.",
-        "USERNAME_ALREADY_EXISTS"
-      );
-    }
-  }
-
   try {
     const user = new User({
       username,
