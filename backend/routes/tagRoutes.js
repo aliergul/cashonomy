@@ -4,7 +4,7 @@ const tagController = require("../controllers/tag.controller");
 const validateTag = require("../middlewares/validateTag");
 
 router.post("/add-tag", validateTag, tagController.addTag);
-//router.get("/get-records", recordController.getRecords);
+router.get("/get-tags", tagController.getTags);
 router.delete("/delete-tag/:tagId", tagController.deleteTag);
 //router.put(
 //  "/edit-record/:recordId",
