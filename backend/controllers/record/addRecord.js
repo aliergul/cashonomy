@@ -16,7 +16,6 @@ exports.addRecord = async (req, res) => {
       message: "The record successfully added.",
     });
   } catch (err) {
-    console.error("MongoDB Save Error:", err); // Hata mesajını görmek için
     return sendErrorResponse(
       res,
       "Unexpected error at saving record.",
