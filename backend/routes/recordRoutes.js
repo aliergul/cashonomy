@@ -5,5 +5,6 @@ const validateRecord = require("../middlewares/validateRecord");
 
 router.post("/add-record", validateRecord, recordController.addRecord);
 router.get("/get-records", recordController.getRecords);
+router.delete("/delete-record/:recordId", recordController.deleteRecord);
 
 module.exports = router;
