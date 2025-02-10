@@ -6,10 +6,6 @@ const validateTag = require("../middlewares/validateTag");
 router.post("/add-tag", validateTag, tagController.addTag);
 router.get("/get-tags", tagController.getTags);
 router.delete("/delete-tag/:tagId", tagController.deleteTag);
-//router.put(
-//  "/edit-record/:recordId",
-//  validateRecord,
-//  recordController.editRecord
-//);
+router.put("/edit-tag/:tagId", validateTag, tagController.editTag);
 
 module.exports = router;
