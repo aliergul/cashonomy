@@ -34,5 +34,11 @@
   },
   "dashboard": {
     "logout": "Çıkış Yap"
+  },
+  "sidebar": {
+    "dashboard": "Ana Sayfa",
+    "incomes": "Gelirler",
+    "outcomes": "Giderler",
+    "tags": "Etiketler"
   }
 }

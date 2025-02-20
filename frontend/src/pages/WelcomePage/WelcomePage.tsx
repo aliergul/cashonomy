@@ -11,7 +11,7 @@ const WelcomePage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-20 p-5">
+    <div className="flex flex-col p-5 min-h-screen justify-center">
       <div className="flex justify-center space-x-8">
         <Description />
         <div className="w-1/4 flex items-center justify-center bg-light_bg dark:bg-dark_bg shadow rounded border border-light_border dark:border-dark_border">
