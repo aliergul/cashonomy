@@ -1,5 +1,5 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
-import { Snackbar } from "../../types/Snackbar";
+import { Snackbar } from "../types/Snackbar";
 
 interface SnackbarState {
   items: Snackbar[];

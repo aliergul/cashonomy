@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useAppSelector } from "../../store";
 import { useDispatch } from "react-redux";
-import { removeSnackbar } from "./SnackbarSlice";
+import { removeSnackbar } from "../../store/snackbarSlice";
 import { useTransition, animated } from "react-spring";
 import SnackbarItem from "./SnackbarItem";
 

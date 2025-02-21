@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { addSnackbar } from "./SnackbarSlice";
+import { addSnackbar } from "../../store/snackbarSlice";
 
 type Options = {
   duration: number;
