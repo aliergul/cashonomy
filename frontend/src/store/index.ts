@@ -4,11 +4,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import authSlice, { logout } from "./authSlice";
 import snackbarSlice from "../components/Snackbar/SnackbarSlice";
 import { authApi } from "./authApi";
+import { recordsApi } from "./recordsQuery";
 
 const reducers = combineReducers({
   auth: authSlice,
   snackbars: snackbarSlice,
   [authApi.reducerPath]: authApi.reducer,
+  [recordsApi.reducerPath]: recordsApi.reducer,
 });
 
 // reset state on logout
@@ -26,7 +28,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(authApi.middleware),
+    }).concat(authApi.middleware, recordsApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
