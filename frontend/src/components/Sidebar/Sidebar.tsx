@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
     };
   };
   return (
-    <div className="h-screen w-64 bg-gray-900 dark:bg-gray-800 text-white flex flex-col p-6 gap-6 shadow-lg">
+    <div className="min-h-screen w-64 bg-gray-900 dark:bg-gray-800 text-white flex flex-col p-6 gap-6 shadow-lg">
       <ProfileCard />
       <SidebarLink links={links} />
       <div className="flex flex-grow"></div>
