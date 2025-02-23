@@ -5,12 +5,14 @@ import authSlice, { logout } from "./authSlice";
 import snackbarSlice from "./snackbarSlice";
 import { authApi } from "./authApi";
 import { recordsApi } from "./recordsQuery";
+import { tagsApi } from "./tagsQuery";
 
 const reducers = combineReducers({
   auth: authSlice,
   snackbars: snackbarSlice,
   [authApi.reducerPath]: authApi.reducer,
   [recordsApi.reducerPath]: recordsApi.reducer,
+  [tagsApi.reducerPath]: tagsApi.reducer,
 });
 
 // reset state on logout
@@ -28,7 +30,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(authApi.middleware, recordsApi.middleware),
+    }).concat(authApi.middleware, recordsApi.middleware, tagsApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
