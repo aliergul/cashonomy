@@ -5,13 +5,10 @@ import authSlice, { logout } from "./authSlice";
 import snackbarSlice from "./snackbarSlice";
 import { authApi } from "./authApi";
 import { recordsApi } from "./recordsQuery";
-import { incomesReducer, outcomesReducer } from "./recordsSlice";
 
 const reducers = combineReducers({
   auth: authSlice,
   snackbars: snackbarSlice,
-  incomes: incomesReducer,
-  outcomes: outcomesReducer,
   [authApi.reducerPath]: authApi.reducer,
   [recordsApi.reducerPath]: recordsApi.reducer,
 });
