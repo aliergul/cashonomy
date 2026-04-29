@@ -95,8 +95,8 @@ _Sistem mimarisi ve iş kuralları kararları. Bu kararların dışına çıkıl
 - [x] `next-themes` (Dark/Light mode) ve i18n (TR/EN, `next-intl`) kurulumu.
 - [x] **Logger kurulumu:** `lib/logger.ts` — Pino tabanlı wrapper. Service layer ve API routes bunu kullanacak.
 - [x] **Test infra kurulumu:** Vitest config, Playwright config, MSW setup. Hello-world testi geçecek.
-- [ ] **decimal.js** ve `lib/money.ts` (toMoney, addMoney, roundMoney, formatMoney helper'ları) kurulumu.
-- [ ] **Manuel kontrol:** `npm run dev`, `npm run lint`, `npm run test`, `npm run test:e2e` komutları çalışıyor olmalı.
+- [x] **decimal.js** ve `lib/money.ts` (toMoney, addMoney, roundMoney, formatMoney helper'ları) kurulumu.
+- [x] **Manuel kontrol:** `npm run dev`, `npm run lint`, `npm run test`, `npm run test:e2e` komutları çalışıyor olmalı.
 - [ ] Supabase Type Generation: Veritabanı şeması oluşturulduktan sonra npx supabase gen types typescript --local > types/supabase.ts komutu çalıştırılarak DB tipleri projeye dahil edilecek. Tüm servisler bu tipleri (Database interface) kullanacak.
 
 ---
