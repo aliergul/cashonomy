@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+build
+coverage
+public
+*.log
+package-lock.json
+.env*
+next-env.d.ts
+
+# Master rehber — auto-formatlama yapılmaz
+progress.md
