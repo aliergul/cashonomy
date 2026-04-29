@@ -91,7 +91,7 @@ _Sistem mimarisi ve iş kuralları kararları. Bu kararların dışına çıkıl
   supabase/migrations/  # SQL migrations
   tests/                # Unit + E2E
   ```
-- [ ] Supabase bağlantısı (`@supabase/ssr`) ve `.env.local` ayarı (server + client client'ları ayrı).
+- [x] Supabase bağlantısı (`@supabase/ssr`) ve `.env.local` ayarı (server + client client'ları ayrı).
 - [ ] `next-themes` (Dark/Light mode) ve i18n (TR/EN, `next-intl`) kurulumu.
 - [ ] **Logger kurulumu:** `lib/logger.ts` — Pino tabanlı wrapper. Service layer ve API routes bunu kullanacak.
 - [ ] **Test infra kurulumu:** Vitest config, Playwright config, MSW setup. Hello-world testi geçecek.
