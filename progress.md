@@ -16,7 +16,7 @@ _Bu dosyayı okuyan Yapay Zeka Asistanı, aşağıdaki kurallara KESİNLİKLE uy
 
 1. **Adım Adım İlerle (Step-by-Step):** Asla birden fazla maddeyi aynı anda yapmaya çalışma. Sadece senden istenen spesifik maddeye odaklan.
 2. **Onay Bekle (Wait for Confirmation):** Üzerinde çalıştığın madde ile ilgili kodlamayı bitirdiğinde dur. Asla bir sonraki maddeye kendi inisiyatifinle geçme. Kullanıcıdan devam komutu bekle.
-3. **Git Commit & Push:** Kullanıcı bir maddenin/fazın başarıyla tamamlandığını onayladığında, değişiklikleri Git'e kaydet ve sade bir mesajla GitHub'a pushla. Commit mesaj formatı: `feat(faz-X): kısa açıklama` veya `fix/chore/test/refactor`.
+3. **Git Commit & Push:** Kullanıcı bir maddenin/fazın başarıyla tamamlandığını onayladığında, değişiklikleri Git'e kaydet ve sade bir mesajla GitHub'a pushla. Commit mesaj formatı: `feat(faz-X): ingilizce kısa açıklama` veya `fix/chore/test/refactor`.
 4. **Kapsam Dışına Çıkma (No Hallucination):** Kullanıcı aksini belirtmedikçe bu belgedeki teknoloji yığınının ve mimari kararların dışına çıkma. Faz 0'daki kararlar bağlayıcıdır.
 5. **Durum Güncellemesi (Update State):** Tamamlanan adımların başındaki `[ ]` işaretini `[x]` olarak değiştir. Bu güncellemeyi kullanıcı onayından sonra, commit'ten önce yap.
 6. **Test Zorunluluğu:** Her kritik feature veya servis yazımından sonra en az 1 test senaryosu/manuel kontrol mekanizması oluştur. Service Layer (Faz 4) için unit test ZORUNLUDUR, opsiyonel değildir.
@@ -92,7 +92,7 @@ _Sistem mimarisi ve iş kuralları kararları. Bu kararların dışına çıkıl
   tests/                # Unit + E2E
   ```
 - [x] Supabase bağlantısı (`@supabase/ssr`) ve `.env.local` ayarı (server + client client'ları ayrı).
-- [ ] `next-themes` (Dark/Light mode) ve i18n (TR/EN, `next-intl`) kurulumu.
+- [x] `next-themes` (Dark/Light mode) ve i18n (TR/EN, `next-intl`) kurulumu.
 - [ ] **Logger kurulumu:** `lib/logger.ts` — Pino tabanlı wrapper. Service layer ve API routes bunu kullanacak.
 - [ ] **Test infra kurulumu:** Vitest config, Playwright config, MSW setup. Hello-world testi geçecek.
 - [ ] **decimal.js** ve `lib/money.ts` (toMoney, addMoney, roundMoney, formatMoney helper'ları) kurulumu.
@@ -113,7 +113,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
   - `avatar_url TEXT`
   - `base_currency CHAR(3) NOT NULL DEFAULT 'USD'`
   - `timezone TEXT NOT NULL DEFAULT 'UTC'` (IANA timezone, örn. `'Europe/Istanbul'`)
-  - `locale TEXT NOT NULL DEFAULT 'en'` (`'tr' | 'en'`)
+  - `locale TEXT NOT NULL DEFAULT 'tr'` (`'tr' | 'en'`)
   - `created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`
   - `updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`
   - `deleted_at TIMESTAMPTZ` (soft delete — hesap pasifleştirme)
