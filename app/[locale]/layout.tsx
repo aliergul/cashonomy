@@ -7,6 +7,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 
 import { ThemeProvider } from "@/components/shared/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { routing } from "@/i18n/routing";
 
 const geistSans = Geist({
@@ -53,6 +54,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster richColors closeButton />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

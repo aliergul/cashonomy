@@ -29,6 +29,14 @@ _Bu dosyayı okuyan Yapay Zeka Asistanı, aşağıdaki kurallara KESİNLİKLE uy
 
 ---
 
+## 🎨 UI & TASARIM PRENSİPLERİ (GLOBAL BINDING RULES)
+1. **Tasarım Dili (Vibe):** Cashonomy; Vercel / Linear tarzı modern, minimalist, güven veren ve temiz bir arayüze sahip olmalıdır.
+2. **Renk Paleti:** Ana yapı (arkaplanlar, metinler, kenarlıklar) için Tailwind'in `zinc` veya `slate` tonları kullanılacaktır. Gelirler (income) için `emerald`, giderler (expense) için `rose` veya `red` aksan renkleri tercih edilecektir. Her iki temanın da (Dark/Light) kusursuz görünmesi şarttır.
+3. **Layout & Boşluklar (Whitespace):** Arayüz sıkışık olmamalıdır. İnce kenarlıklar (`border`), hafif gölgeler (`shadow-sm` veya `shadow-md`) ve bol beyaz alan (cömert padding/margin) kullanılmalıdır.
+4. **Bileşen Kullanımı:** shadcn/ui bileşenleri (Card, Button, Input vb.) her zaman önceliklidir.
+
+---
+
 ## 🔴 FAZ 0 — PRODUCT & SYSTEM DESIGN (TAMAMLANDI / BAĞLAYICI KARARLAR)
 
 _Sistem mimarisi ve iş kuralları kararları. Bu kararların dışına çıkılamaz._
@@ -97,7 +105,7 @@ _Sistem mimarisi ve iş kuralları kararları. Bu kararların dışına çıkıl
 - [x] **Test infra kurulumu:** Vitest config, Playwright config, MSW setup. Hello-world testi geçecek.
 - [x] **decimal.js** ve `lib/money.ts` (toMoney, addMoney, roundMoney, formatMoney helper'ları) kurulumu.
 - [x] **Manuel kontrol:** `npm run dev`, `npm run lint`, `npm run test`, `npm run test:e2e` komutları çalışıyor olmalı.
-- [ ] Supabase Type Generation: Veritabanı şeması oluşturulduktan sonra npx supabase gen types typescript --local > types/supabase.ts komutu çalıştırılarak DB tipleri projeye dahil edilecek. Tüm servisler bu tipleri (Database interface) kullanacak.
+- [x] Supabase Type Generation: Veritabanı şeması oluşturulduktan sonra npx supabase gen types typescript --local > types/supabase.ts komutu çalıştırılarak DB tipleri projeye dahil edilecek. Tüm servisler bu tipleri (Database interface) kullanacak.
 
 ---
 
@@ -107,7 +115,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
 
 ### Tablolar
 
-- [ ] `profiles`
+- [x] `profiles`
   - `id UUID PK REFERENCES auth.users(id) ON DELETE CASCADE`
   - `full_name TEXT`
   - `avatar_url TEXT`
@@ -118,7 +126,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
   - `updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()`
   - `deleted_at TIMESTAMPTZ` (soft delete — hesap pasifleştirme)
 
-- [ ] `labels`
+- [x] `labels`
   - `id UUID PK DEFAULT gen_random_uuid()`
   - `user_id UUID NOT NULL REFERENCES auth.users(id) ON DELETE CASCADE`
   - `name TEXT NOT NULL`
@@ -127,7 +135,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
   - `created_at`, `updated_at`, `deleted_at`
   - UNIQUE(user_id, name) WHERE deleted_at IS NULL
 
-- [ ] `recurring_templates`
+- [x] `recurring_templates`
   - `id UUID PK`, `user_id UUID NOT NULL`
   - `type TEXT CHECK (type IN ('income', 'expense'))`
   - `amount NUMERIC(15,2) NOT NULL`
@@ -139,7 +147,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
   - `last_generated_until DATE` (lazy generation için cursor)
   - `created_at`, `updated_at`, `deleted_at`
 
-- [ ] `installment_plans`
+- [x] `installment_plans`
   - `id UUID PK`, `user_id UUID NOT NULL`
   - `total_amount NUMERIC(15,2) NOT NULL`
   - `currency CHAR(3) NOT NULL`
@@ -149,7 +157,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
   - `start_date DATE NOT NULL`
   - `created_at`, `updated_at`, `deleted_at`
 
-- [ ] `transactions` — **CORE TABLO**
+- [x] `transactions` — **CORE TABLO**
   - `id UUID PK`, `user_id UUID NOT NULL`
   - `type TEXT NOT NULL CHECK (type IN ('income', 'expense'))`
   - `status TEXT NOT NULL DEFAULT 'paid' CHECK (status IN ('paid', 'unpaid'))`
@@ -170,13 +178,13 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
   - `is_modified BOOLEAN NOT NULL DEFAULT FALSE` (seri kaydı manuel düzenlenmiş mi)
   - `created_at`, `updated_at`, `deleted_at`
 
-- [ ] `transaction_labels` (many-to-many bridge)
+- [x] `transaction_labels` (many-to-many bridge)
   - `transaction_id UUID REFERENCES transactions(id) ON DELETE CASCADE`
   - `label_id UUID REFERENCES labels(id) ON DELETE CASCADE`
   - `user_id UUID NOT NULL` (RLS performance için denormalize)
   - PRIMARY KEY (transaction_id, label_id)
 
-- [ ] `historical_rates` (paylaşımlı tablo, user_id YOK)
+- [x] `historical_rates` (paylaşımlı tablo, user_id YOK)
   - `id UUID PK`
   - `base_currency CHAR(3) NOT NULL`
   - `target_currency CHAR(3) NOT NULL`
@@ -187,7 +195,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
 
 ### RLS Policies
 
-- [ ] Tüm kullanıcı-bağlı tablolarda 4 policy:
+- [x] Tüm kullanıcı-bağlı tablolarda 4 policy:
   ```sql
   CREATE POLICY "users_select_own" ON {table} FOR SELECT
     USING (auth.uid() = user_id);
@@ -198,33 +206,33 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
   CREATE POLICY "users_delete_own" ON {table} FOR DELETE
     USING (auth.uid() = user_id);
   ```
-- [ ] `historical_rates`: SELECT herkese açık (authenticated), INSERT/UPDATE/DELETE sadece `service_role`.
-- [ ] `profiles` için INSERT trigger: yeni `auth.users` kaydında otomatik profile oluştur.
+- [x] `historical_rates`: SELECT herkese açık (authenticated), INSERT/UPDATE/DELETE sadece `service_role`.
+- [x] `profiles` için INSERT trigger: yeni `auth.users` kaydında otomatik profile oluştur.
 
 ### Indexler
 
-- [ ] `transactions(user_id, year, month)` — listeleme için.
-- [ ] `transactions(user_id, transaction_date DESC)` — son işlemler için.
-- [ ] `transactions(parent_id)` — seri sorguları.
-- [ ] `transactions(source_type, source_id)` — kaynak takibi.
-- [ ] `transactions(user_id, status)` WHERE status = 'unpaid' — partial index, notification için.
-- [ ] `transaction_labels(label_id)` ve `(transaction_id)`.
-- [ ] `historical_rates(base_currency, target_currency, date)` — UNIQUE zaten var, query optimizer kullanır.
+- [x] `transactions(user_id, year, month)` — listeleme için.
+- [x] `transactions(user_id, transaction_date DESC)` — son işlemler için.
+- [x] `transactions(parent_id)` — seri sorguları.
+- [x] `transactions(source_type, source_id)` — kaynak takibi.
+- [x] `transactions(user_id, status)` WHERE status = 'unpaid' — partial index, notification için.
+- [x] `transaction_labels(label_id)` ve `(transaction_id)`.
+- [x] `historical_rates(base_currency, target_currency, date)` — UNIQUE zaten var, query optimizer kullanır.
 
 ### Soft Delete Helper
 
-- [ ] DB-level görünüm veya servis-level helper: `deleted_at IS NULL` filtresinin kaçırılmaması için service layer'da `baseQuery()` zorunlu kullanılacak.
+- [x] DB-level görünüm veya servis-level helper: `deleted_at IS NULL` filtresinin kaçırılmaması için service layer'da `baseQuery()` zorunlu kullanılacak.
 
 ### Migration & Verification
 
-- [ ] Tüm yapı `supabase/migrations/0001_init.sql` olarak commit'lenecek.
-- [ ] Manuel kontrol: 2 farklı user oluştur, A user'ı B user'ının verisini hiçbir endpoint'ten göremediğini doğrula.
+- [x] Tüm yapı `supabase/migrations/0001_init.sql` olarak commit'lenecek.
+- [x] Manuel kontrol: 2 farklı user oluştur, A user'ı B user'ının verisini hiçbir endpoint'ten göremediğini doğrula.
 
 ---
 
 ## 🔐 FAZ 3 — AUTH SYSTEM
 
-- [ ] Email/Şifre ile kayıt ve giriş ekranları (shadcn/ui form + zod).
+- [x] Email/Şifre ile kayıt ve giriş ekranları (shadcn/ui form + zod).
 - [ ] Email confirmation flow (Supabase default).
 - [ ] Şifre sıfırlama flow.
 - [ ] Google Auth entegrasyonu (Supabase üzerinden).

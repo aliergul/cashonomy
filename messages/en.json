@@ -2,5 +2,31 @@
   "Common": {
     "appName": "Cashonomy",
     "welcome": "Welcome"
+  },
+  "Auth": {
+    "tagline": "Manage your personal finances with clarity.",
+    "loginTitle": "Sign In",
+    "loginDescription": "Enter your credentials to access your account.",
+    "registerTitle": "Create Account",
+    "registerDescription": "Welcome to Cashonomy. Get started in seconds.",
+    "email": "Email",
+    "emailPlaceholder": "you@cashonomy.app",
+    "password": "Password",
+    "passwordPlaceholder": "At least 8 characters",
+    "confirmPassword": "Confirm Password",
+    "loginButton": "Sign In",
+    "registerButton": "Create Account",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "createOne": "Sign up",
+    "signIn": "Sign in",
+    "errors": {
+      "emailInvalid": "Enter a valid email address.",
+      "passwordTooShort": "Password must be at least 8 characters.",
+      "passwordsDontMatch": "Passwords do not match."
+    },
+    "toast": {
+      "notImplemented": "Supabase integration will be added in the next step."
+    }
   }
 }
