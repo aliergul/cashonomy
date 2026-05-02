@@ -9,6 +9,9 @@
     "loginDescription": "Enter your credentials to access your account.",
     "registerTitle": "Create Account",
     "registerDescription": "Welcome to Cashonomy. Get started in seconds.",
+    "verifyEmailTitle": "Verify Your Email",
+    "verifyEmailDescription": "We sent you a confirmation link. Click the link in your inbox to continue.",
+    "verifyEmailHint": "Don't forget to check your spam folder if you can't find the link.",
     "email": "Email",
     "emailPlaceholder": "you@cashonomy.app",
     "password": "Password",
@@ -20,13 +23,16 @@
     "haveAccount": "Already have an account?",
     "createOne": "Sign up",
     "signIn": "Sign in",
+    "backToLogin": "Back to sign in",
     "errors": {
       "emailInvalid": "Enter a valid email address.",
       "passwordTooShort": "Password must be at least 8 characters.",
       "passwordsDontMatch": "Passwords do not match."
     },
     "toast": {
-      "notImplemented": "Supabase integration will be added in the next step."
+      "notImplemented": "Supabase integration will be added in the next step.",
+      "signUpError": "Sign up failed: {message}",
+      "alreadyRegistered": "This email is already registered."
     }
   }
 }

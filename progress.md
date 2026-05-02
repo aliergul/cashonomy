@@ -233,7 +233,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
 ## 🔐 FAZ 3 — AUTH SYSTEM
 
 - [x] Email/Şifre ile kayıt ve giriş ekranları (shadcn/ui form + zod).
-- [ ] Email confirmation flow (Supabase default).
+- [x] Email confirmation flow (Supabase default).
 - [ ] Şifre sıfırlama flow.
 - [ ] Google Auth entegrasyonu (Supabase üzerinden).
 - [ ] Protected Routes (Next.js middleware) — `/app/(protected)/*` route group.

@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -25,7 +25,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/client";
 import {
   buildRegisterSchema,
   type RegisterValues,
@@ -34,6 +35,8 @@ import {
 export function RegisterForm() {
   const t = useTranslations("Auth");
   const tErrors = useTranslations("Auth.errors");
+  const locale = useLocale();
+  const router = useRouter();
 
   const schema = useMemo(
     () =>
@@ -51,8 +54,26 @@ export function RegisterForm() {
   });
 
   const onSubmit = async (values: RegisterValues) => {
-    console.info("[auth.register.submit]", { email: values.email });
-    toast.info(t("toast.notImplemented"));
+    const supabase = createClient();
+    const { data, error } = await supabase.auth.signUp({
+      email: values.email,
+      password: values.password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/${locale}/auth/callback`,
+      },
+    });
+
+    if (error) {
+      toast.error(t("toast.signUpError", { message: error.message }));
+      return;
+    }
+
+    if (!data.user?.identities || data.user.identities.length === 0) {
+      toast.error(t("toast.alreadyRegistered"));
+      return;
+    }
+
+    router.replace("/verify-email");
   };
 
   return (
