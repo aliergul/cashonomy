@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -12,7 +12,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -25,16 +24,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "@/i18n/navigation";
-import { buildLoginSchema, type LoginValues } from "@/modules/auth/schemas/auth";
+import { useRouter } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/client";
+import {
+  buildResetPasswordSchema,
+  type ResetPasswordValues,
+} from "@/modules/auth/schemas/auth";
 
-export function LoginForm() {
+export function ResetPasswordForm() {
   const t = useTranslations("Auth");
   const tErrors = useTranslations("Auth.errors");
+  const router = useRouter();
 
   const schema = useMemo(
     () =>
-      buildLoginSchema({
+      buildResetPasswordSchema({
         emailInvalid: tErrors("emailInvalid"),
         passwordTooShort: tErrors("passwordTooShort"),
         passwordsDontMatch: tErrors("passwordsDontMatch"),
@@ -42,36 +46,57 @@ export function LoginForm() {
     [tErrors],
   );
 
-  const form = useForm<LoginValues>({
+  const form = useForm<ResetPasswordValues>({
     resolver: zodResolver(schema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { password: "", confirmPassword: "" },
   });
 
-  const onSubmit = async (values: LoginValues) => {
-    console.info("[auth.login.submit]", { email: values.email });
-    toast.info(t("toast.notImplemented"));
+  useEffect(() => {
+    const supabase = createClient();
+    void supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) {
+        toast.error(t("toast.resetSessionMissing"));
+        router.replace("/forgot-password");
+      }
+    });
+  }, [router, t]);
+
+  const onSubmit = async (values: ResetPasswordValues) => {
+    const supabase = createClient();
+    const { error } = await supabase.auth.updateUser({
+      password: values.password,
+    });
+
+    if (error) {
+      toast.error(t("toast.passwordUpdateError", { message: error.message }));
+      return;
+    }
+
+    await supabase.auth.signOut();
+    toast.success(t("toast.passwordUpdated"));
+    router.replace("/login");
   };
 
   return (
     <Card>
       <CardHeader className="gap-1.5">
-        <CardTitle className="text-xl">{t("loginTitle")}</CardTitle>
-        <CardDescription>{t("loginDescription")}</CardDescription>
+        <CardTitle className="text-xl">{t("resetPasswordTitle")}</CardTitle>
+        <CardDescription>{t("resetPasswordDescription")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
             <FormField
               control={form.control}
-              name="email"
+              name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>{t("email")}</FormLabel>
+                  <FormLabel>{t("newPassword")}</FormLabel>
                   <FormControl>
                     <Input
-                      type="email"
-                      autoComplete="email"
-                      placeholder={t("emailPlaceholder")}
+                      type="password"
+                      autoComplete="new-password"
+                      placeholder={t("newPasswordPlaceholder")}
                       {...field}
                     />
                   </FormControl>
@@ -81,23 +106,14 @@ export function LoginForm() {
             />
             <FormField
               control={form.control}
-              name="password"
+              name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex items-center justify-between">
-                    <FormLabel>{t("password")}</FormLabel>
-                    <Link
-                      href="/forgot-password"
-                      className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                    >
-                      {t("forgotPasswordLink")}
-                    </Link>
-                  </div>
+                  <FormLabel>{t("confirmNewPassword")}</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
-                      autoComplete="current-password"
-                      placeholder={t("passwordPlaceholder")}
+                      autoComplete="new-password"
                       {...field}
                     />
                   </FormControl>
@@ -113,20 +129,11 @@ export function LoginForm() {
               {form.formState.isSubmitting ? (
                 <Loader2 className="size-4 animate-spin" />
               ) : null}
-              {t("loginButton")}
+              {t("resetPasswordButton")}
             </Button>
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="justify-center gap-1 text-sm text-muted-foreground">
-        <span>{t("noAccount")}</span>
-        <Link
-          href="/register"
-          className="font-medium text-foreground underline-offset-4 hover:underline"
-        >
-          {t("createOne")}
-        </Link>
-      </CardFooter>
     </Card>
   );
 }

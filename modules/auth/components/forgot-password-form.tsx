@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -25,16 +25,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "@/i18n/navigation";
-import { buildLoginSchema, type LoginValues } from "@/modules/auth/schemas/auth";
+import { Link, useRouter } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/client";
+import {
+  buildForgotPasswordSchema,
+  type ForgotPasswordValues,
+} from "@/modules/auth/schemas/auth";
 
-export function LoginForm() {
+export function ForgotPasswordForm() {
   const t = useTranslations("Auth");
   const tErrors = useTranslations("Auth.errors");
+  const locale = useLocale();
+  const router = useRouter();
 
   const schema = useMemo(
     () =>
-      buildLoginSchema({
+      buildForgotPasswordSchema({
         emailInvalid: tErrors("emailInvalid"),
         passwordTooShort: tErrors("passwordTooShort"),
         passwordsDontMatch: tErrors("passwordsDontMatch"),
@@ -42,21 +48,32 @@ export function LoginForm() {
     [tErrors],
   );
 
-  const form = useForm<LoginValues>({
+  const form = useForm<ForgotPasswordValues>({
     resolver: zodResolver(schema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: "" },
   });
 
-  const onSubmit = async (values: LoginValues) => {
-    console.info("[auth.login.submit]", { email: values.email });
-    toast.info(t("toast.notImplemented"));
+  const onSubmit = async (values: ForgotPasswordValues) => {
+    const supabase = createClient();
+    const redirectTo = `${window.location.origin}/${locale}/auth/callback?next=/reset-password`;
+    const { error } = await supabase.auth.resetPasswordForEmail(values.email, {
+      redirectTo,
+    });
+
+    if (error) {
+      toast.error(t("toast.resetEmailError", { message: error.message }));
+      return;
+    }
+
+    toast.success(t("toast.resetEmailSent", { email: values.email }));
+    router.replace("/login");
   };
 
   return (
     <Card>
       <CardHeader className="gap-1.5">
-        <CardTitle className="text-xl">{t("loginTitle")}</CardTitle>
-        <CardDescription>{t("loginDescription")}</CardDescription>
+        <CardTitle className="text-xl">{t("forgotPasswordTitle")}</CardTitle>
+        <CardDescription>{t("forgotPasswordDescription")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -79,32 +96,6 @@ export function LoginForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex items-center justify-between">
-                    <FormLabel>{t("password")}</FormLabel>
-                    <Link
-                      href="/forgot-password"
-                      className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                    >
-                      {t("forgotPasswordLink")}
-                    </Link>
-                  </div>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      autoComplete="current-password"
-                      placeholder={t("passwordPlaceholder")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <Button
               type="submit"
               className="mt-2 w-full"
@@ -113,18 +104,17 @@ export function LoginForm() {
               {form.formState.isSubmitting ? (
                 <Loader2 className="size-4 animate-spin" />
               ) : null}
-              {t("loginButton")}
+              {t("forgotPasswordButton")}
             </Button>
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="justify-center gap-1 text-sm text-muted-foreground">
-        <span>{t("noAccount")}</span>
+      <CardFooter className="justify-center text-sm">
         <Link
-          href="/register"
+          href="/login"
           className="font-medium text-foreground underline-offset-4 hover:underline"
         >
-          {t("createOne")}
+          {t("backToLogin")}
         </Link>
       </CardFooter>
     </Card>

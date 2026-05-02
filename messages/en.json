@@ -12,6 +12,16 @@
     "verifyEmailTitle": "Verify Your Email",
     "verifyEmailDescription": "We sent you a confirmation link. Click the link in your inbox to continue.",
     "verifyEmailHint": "Don't forget to check your spam folder if you can't find the link.",
+    "forgotPasswordTitle": "Forgot Your Password?",
+    "forgotPasswordDescription": "Enter your email and we'll send you a reset link.",
+    "forgotPasswordButton": "Send Reset Link",
+    "forgotPasswordLink": "Forgot password?",
+    "resetPasswordTitle": "Set a New Password",
+    "resetPasswordDescription": "Choose a strong password you haven't used before.",
+    "newPassword": "New Password",
+    "newPasswordPlaceholder": "At least 8 characters",
+    "confirmNewPassword": "Confirm New Password",
+    "resetPasswordButton": "Update Password",
     "email": "Email",
     "emailPlaceholder": "you@cashonomy.app",
     "password": "Password",
@@ -32,7 +42,12 @@
     "toast": {
       "notImplemented": "Supabase integration will be added in the next step.",
       "signUpError": "Sign up failed: {message}",
-      "alreadyRegistered": "This email is already registered."
+      "alreadyRegistered": "This email is already registered.",
+      "resetEmailSent": "If an account exists for {email}, a reset link has been sent.",
+      "resetEmailError": "Could not send reset link: {message}",
+      "passwordUpdated": "Your password has been updated. Please sign in.",
+      "passwordUpdateError": "Could not update password: {message}",
+      "resetSessionMissing": "Reset link is invalid or expired. Please request a new one."
     }
   }
 }

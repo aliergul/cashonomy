@@ -12,6 +12,16 @@
     "verifyEmailTitle": "E-postanı Doğrula",
     "verifyEmailDescription": "Sana bir doğrulama bağlantısı gönderdik. Devam etmek için gelen kutundaki bağlantıya tıkla.",
     "verifyEmailHint": "Bağlantı görünmüyorsa spam klasörünü kontrol etmeyi unutma.",
+    "forgotPasswordTitle": "Şifreni mi Unuttun?",
+    "forgotPasswordDescription": "E-postanı gir, sana sıfırlama bağlantısı gönderelim.",
+    "forgotPasswordButton": "Sıfırlama Bağlantısı Gönder",
+    "forgotPasswordLink": "Şifremi unuttum",
+    "resetPasswordTitle": "Yeni Şifre Belirle",
+    "resetPasswordDescription": "Daha önce kullanmadığın güçlü bir şifre seç.",
+    "newPassword": "Yeni Şifre",
+    "newPasswordPlaceholder": "En az 8 karakter",
+    "confirmNewPassword": "Yeni Şifre (Tekrar)",
+    "resetPasswordButton": "Şifreyi Güncelle",
     "email": "E-posta",
     "emailPlaceholder": "ornek@cashonomy.app",
     "password": "Şifre",
@@ -32,7 +42,12 @@
     "toast": {
       "notImplemented": "Supabase entegrasyonu bir sonraki adımda eklenecek.",
       "signUpError": "Kayıt başarısız: {message}",
-      "alreadyRegistered": "Bu e-posta zaten kayıtlı."
+      "alreadyRegistered": "Bu e-posta zaten kayıtlı.",
+      "resetEmailSent": "{email} için bir hesap varsa sıfırlama bağlantısı gönderildi.",
+      "resetEmailError": "Sıfırlama bağlantısı gönderilemedi: {message}",
+      "passwordUpdated": "Şifren güncellendi. Lütfen giriş yap.",
+      "passwordUpdateError": "Şifre güncellenemedi: {message}",
+      "resetSessionMissing": "Sıfırlama bağlantısı geçersiz veya süresi dolmuş. Lütfen yeniden talep et."
     }
   }
 }

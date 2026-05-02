@@ -11,6 +11,9 @@ export async function GET(request: Request, { params }: CallbackContext) {
   const { locale } = await params;
   const url = new URL(request.url);
   const code = url.searchParams.get("code");
+  const next = url.searchParams.get("next");
+  const safeNext =
+    next && next.startsWith("/") && !next.startsWith("//") ? next : "/";
 
   if (!code) {
     logger.warn({ url: request.url }, "auth.callback.missing_code");
@@ -32,5 +35,6 @@ export async function GET(request: Request, { params }: CallbackContext) {
     );
   }
 
-  return NextResponse.redirect(new URL(`/${locale}`, url.origin));
+  const redirectPath = safeNext === "/" ? `/${locale}` : `/${locale}${safeNext}`;
+  return NextResponse.redirect(new URL(redirectPath, url.origin));
 }
