@@ -34,6 +34,8 @@
     "createOne": "Sign up",
     "signIn": "Sign in",
     "backToLogin": "Back to sign in",
+    "orContinueWith": "or continue with",
+    "continueWithGoogle": "Continue with Google",
     "errors": {
       "emailInvalid": "Enter a valid email address.",
       "passwordTooShort": "Password must be at least 8 characters.",
@@ -47,7 +49,8 @@
       "resetEmailError": "Could not send reset link: {message}",
       "passwordUpdated": "Your password has been updated. Please sign in.",
       "passwordUpdateError": "Could not update password: {message}",
-      "resetSessionMissing": "Reset link is invalid or expired. Please request a new one."
+      "resetSessionMissing": "Reset link is invalid or expired. Please request a new one.",
+      "googleSignInError": "Google sign-in failed: {message}"
     }
   }
 }

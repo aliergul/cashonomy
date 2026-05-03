@@ -235,7 +235,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
 - [x] Email/Şifre ile kayıt ve giriş ekranları (shadcn/ui form + zod).
 - [x] Email confirmation flow (Supabase default).
 - [x] Şifre sıfırlama flow.
-- [ ] Google Auth entegrasyonu (Supabase üzerinden).
+- [x] Google Auth entegrasyonu (Supabase üzerinden).
 - [ ] Protected Routes (Next.js middleware) — `/app/(protected)/*` route group.
 - [ ] Auth context provider (Zustand auth store).
 - [ ] **Manuel kontrol:** Logged-out user protected route'a erişemiyor; logged-in user `/login`'e gittiğinde dashboard'a redirect oluyor.

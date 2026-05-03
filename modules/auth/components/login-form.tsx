@@ -25,7 +25,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Link } from "@/i18n/navigation";
+import { GoogleSignInButton } from "@/modules/auth/components/google-sign-in-button";
 import { buildLoginSchema, type LoginValues } from "@/modules/auth/schemas/auth";
 
 export function LoginForm() {
@@ -58,7 +60,7 @@ export function LoginForm() {
         <CardTitle className="text-xl">{t("loginTitle")}</CardTitle>
         <CardDescription>{t("loginDescription")}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="grid gap-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
             <FormField
@@ -117,6 +119,13 @@ export function LoginForm() {
             </Button>
           </form>
         </Form>
+        <div className="relative">
+          <Separator />
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-xs uppercase tracking-wide text-muted-foreground">
+            {t("orContinueWith")}
+          </span>
+        </div>
+        <GoogleSignInButton />
       </CardContent>
       <CardFooter className="justify-center gap-1 text-sm text-muted-foreground">
         <span>{t("noAccount")}</span>

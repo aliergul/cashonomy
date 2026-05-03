@@ -25,8 +25,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 import { Link, useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { GoogleSignInButton } from "@/modules/auth/components/google-sign-in-button";
 import {
   buildRegisterSchema,
   type RegisterValues,
@@ -82,7 +84,7 @@ export function RegisterForm() {
         <CardTitle className="text-xl">{t("registerTitle")}</CardTitle>
         <CardDescription>{t("registerDescription")}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="grid gap-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
             <FormField
@@ -150,6 +152,13 @@ export function RegisterForm() {
             </Button>
           </form>
         </Form>
+        <div className="relative">
+          <Separator />
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-xs uppercase tracking-wide text-muted-foreground">
+            {t("orContinueWith")}
+          </span>
+        </div>
+        <GoogleSignInButton />
       </CardContent>
       <CardFooter className="justify-center gap-1 text-sm text-muted-foreground">
         <span>{t("haveAccount")}</span>
