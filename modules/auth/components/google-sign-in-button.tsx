@@ -47,7 +47,7 @@ export function GoogleSignInButton() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/${locale}/auth/callback?next=/dashboard`,
+        redirectTo: `${window.location.origin}/${locale}/auth/callback`,
       },
     });
 

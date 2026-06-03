@@ -58,7 +58,7 @@ export function RegisterForm() {
       email: values.email,
       password: values.password,
       options: {
-        emailRedirectTo: `${window.location.origin}/${locale}/auth/callback?next=/dashboard`,
+        emailRedirectTo: `${window.location.origin}/${locale}/auth/callback`,
       },
     });
 

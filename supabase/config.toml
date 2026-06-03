@@ -27,10 +27,8 @@ site_url = "http://localhost:3000"
 additional_redirect_urls = [
   "http://localhost:3000/tr/auth/callback",
   "http://localhost:3000/en/auth/callback",
-  "http://localhost:3000/tr/auth/callback?next=/dashboard",
-  "http://localhost:3000/en/auth/callback?next=/dashboard",
-  "http://localhost:3000/tr/auth/callback?next=/reset-password",
-  "http://localhost:3000/en/auth/callback?next=/reset-password",
+  "http://localhost:3000/tr/auth/callback?next=%2Freset-password",
+  "http://localhost:3000/en/auth/callback?next=%2Freset-password",
 ]
 jwt_expiry = 3600
 enable_refresh_token_rotation = true

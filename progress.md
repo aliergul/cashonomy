@@ -239,7 +239,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
 - [x] Google Auth entegrasyonu (Supabase üzerinden).
 - [x] Protected Routes (Next.js middleware) — `/app/(protected)/*` route group.
 - [x] Auth context provider (Zustand auth store).
-- [ ] **Manuel kontrol:** Logged-out user protected route'a erişemiyor; logged-in user `/login`'e gittiğinde dashboard'a redirect oluyor.
+- [x] **Manuel kontrol:** Logged-out user protected route'a erişemiyor; logged-in user `/login`'e gittiğinde dashboard'a redirect oluyor.
 
 ---
 
