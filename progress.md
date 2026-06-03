@@ -237,7 +237,7 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
 - [x] Şifre sıfırlama flow.
 - [x] Google Auth entegrasyonu (Supabase üzerinden).
 - [x] Protected Routes (Next.js middleware) — `/app/(protected)/*` route group.
-- [ ] Auth context provider (Zustand auth store).
+- [x] Auth context provider (Zustand auth store).
 - [ ] **Manuel kontrol:** Logged-out user protected route'a erişemiyor; logged-in user `/login`'e gittiğinde dashboard'a redirect oluyor.
 
 ---

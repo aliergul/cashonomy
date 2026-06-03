@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
 
+import { AuthProvider } from "@/components/shared/auth-provider";
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 
@@ -24,5 +25,5 @@ export default async function ProtectedLayout({
     redirect({ href: "/login", locale });
   }
 
-  return <>{children}</>;
+  return <AuthProvider initialUser={user}>{children}</AuthProvider>;
 }
