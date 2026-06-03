@@ -42,7 +42,8 @@
       "passwordsDontMatch": "Şifreler eşleşmiyor."
     },
     "toast": {
-      "notImplemented": "Supabase entegrasyonu bir sonraki adımda eklenecek.",
+      "loginSuccess": "Giriş başarılı.",
+      "loginError": "Giriş başarısız: {message}",
       "signUpError": "Kayıt başarısız: {message}",
       "alreadyRegistered": "Bu e-posta zaten kayıtlı.",
       "resetEmailSent": "{email} için bir hesap varsa sıfırlama bağlantısı gönderildi.",

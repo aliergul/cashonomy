@@ -47,7 +47,7 @@ export function GoogleSignInButton() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/${locale}/auth/callback`,
+        redirectTo: `${window.location.origin}/${locale}/auth/callback?next=/dashboard`,
       },
     });
 
@@ -65,11 +65,7 @@ export function GoogleSignInButton() {
       onClick={handleClick}
       disabled={isPending}
     >
-      {isPending ? (
-        <Loader2 className="size-4 animate-spin" />
-      ) : (
-        <GoogleIcon className="size-4" />
-      )}
+      {isPending ? <Loader2 className="size-4 animate-spin" /> : <GoogleIcon className="size-4" />}
       {t("continueWithGoogle")}
     </Button>
   );

@@ -27,6 +27,10 @@ site_url = "http://localhost:3000"
 additional_redirect_urls = [
   "http://localhost:3000/tr/auth/callback",
   "http://localhost:3000/en/auth/callback",
+  "http://localhost:3000/tr/auth/callback?next=/dashboard",
+  "http://localhost:3000/en/auth/callback?next=/dashboard",
+  "http://localhost:3000/tr/auth/callback?next=/reset-password",
+  "http://localhost:3000/en/auth/callback?next=/reset-password",
 ]
 jwt_expiry = 3600
 enable_refresh_token_rotation = true
@@ -42,3 +46,8 @@ secure_password_change = false
 max_frequency = "1s"
 otp_length = 6
 otp_expiry = 3600
+
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"

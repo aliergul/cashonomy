@@ -221,11 +221,12 @@ _Aşağıdaki yapı için RLS politikaları ve Index'ler kesinlikle kurulacak. T
 
 ### Soft Delete Helper
 
-- [x] DB-level görünüm veya servis-level helper: `deleted_at IS NULL` filtresinin kaçırılmaması için service layer'da `baseQuery()` zorunlu kullanılacak.
+- [ ] DB-level görünüm veya servis-level helper: `deleted_at IS NULL` filtresinin kaçırılmaması için service layer'da `baseQuery()` zorunlu kullanılacak. Faz 4'te uygulanacak.
 
 ### Migration & Verification
 
 - [x] Tüm yapı `supabase/migrations/0001_init.sql` olarak commit'lenecek.
+- [x] Auth review sonrası DB hardening migration'ı eklendi: `0002_auth_phase_hardening.sql` ile `transaction_labels` owner constraint'leri ve ortak `updated_at` trigger'ları.
 - [x] Manuel kontrol: 2 farklı user oluştur, A user'ı B user'ının verisini hiçbir endpoint'ten göremediğini doğrula.
 
 ---

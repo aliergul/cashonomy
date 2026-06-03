@@ -42,7 +42,8 @@
       "passwordsDontMatch": "Passwords do not match."
     },
     "toast": {
-      "notImplemented": "Supabase integration will be added in the next step.",
+      "loginSuccess": "Signed in successfully.",
+      "loginError": "Sign in failed: {message}",
       "signUpError": "Sign up failed: {message}",
       "alreadyRegistered": "This email is already registered.",
       "resetEmailSent": "If an account exists for {email}, a reset link has been sent.",

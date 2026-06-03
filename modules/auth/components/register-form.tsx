@@ -29,10 +29,7 @@ import { Separator } from "@/components/ui/separator";
 import { Link, useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { GoogleSignInButton } from "@/modules/auth/components/google-sign-in-button";
-import {
-  buildRegisterSchema,
-  type RegisterValues,
-} from "@/modules/auth/schemas/auth";
+import { buildRegisterSchema, type RegisterValues } from "@/modules/auth/schemas/auth";
 
 export function RegisterForm() {
   const t = useTranslations("Auth");
@@ -61,7 +58,7 @@ export function RegisterForm() {
       email: values.email,
       password: values.password,
       options: {
-        emailRedirectTo: `${window.location.origin}/${locale}/auth/callback`,
+        emailRedirectTo: `${window.location.origin}/${locale}/auth/callback?next=/dashboard`,
       },
     });
 
@@ -130,41 +127,31 @@ export function RegisterForm() {
                 <FormItem>
                   <FormLabel>{t("confirmPassword")}</FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      autoComplete="new-password"
-                      {...field}
-                    />
+                    <Input type="password" autoComplete="new-password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button
-              type="submit"
-              className="mt-2 w-full"
-              disabled={form.formState.isSubmitting}
-            >
-              {form.formState.isSubmitting ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : null}
+            <Button type="submit" className="mt-2 w-full" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting ? <Loader2 className="size-4 animate-spin" /> : null}
               {t("registerButton")}
             </Button>
           </form>
         </Form>
         <div className="relative">
           <Separator />
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-xs uppercase tracking-wide text-muted-foreground">
+          <span className="bg-card text-muted-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 text-xs tracking-wide uppercase">
             {t("orContinueWith")}
           </span>
         </div>
         <GoogleSignInButton />
       </CardContent>
-      <CardFooter className="justify-center gap-1 text-sm text-muted-foreground">
+      <CardFooter className="text-muted-foreground justify-center gap-1 text-sm">
         <span>{t("haveAccount")}</span>
         <Link
           href="/login"
-          className="font-medium text-foreground underline-offset-4 hover:underline"
+          className="text-foreground font-medium underline-offset-4 hover:underline"
         >
           {t("signIn")}
         </Link>

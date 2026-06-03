@@ -26,13 +26,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/client";
 import { GoogleSignInButton } from "@/modules/auth/components/google-sign-in-button";
 import { buildLoginSchema, type LoginValues } from "@/modules/auth/schemas/auth";
 
 export function LoginForm() {
   const t = useTranslations("Auth");
   const tErrors = useTranslations("Auth.errors");
+  const router = useRouter();
 
   const schema = useMemo(
     () =>
@@ -50,8 +52,20 @@ export function LoginForm() {
   });
 
   const onSubmit = async (values: LoginValues) => {
-    console.info("[auth.login.submit]", { email: values.email });
-    toast.info(t("toast.notImplemented"));
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    });
+
+    if (error) {
+      toast.error(t("toast.loginError", { message: error.message }));
+      return;
+    }
+
+    toast.success(t("toast.loginSuccess"));
+    router.replace("/dashboard");
+    router.refresh();
   };
 
   return (
@@ -90,7 +104,7 @@ export function LoginForm() {
                     <FormLabel>{t("password")}</FormLabel>
                     <Link
                       href="/forgot-password"
-                      className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+                      className="text-muted-foreground hover:text-foreground text-xs underline-offset-4 hover:underline"
                     >
                       {t("forgotPasswordLink")}
                     </Link>
@@ -107,31 +121,25 @@ export function LoginForm() {
                 </FormItem>
               )}
             />
-            <Button
-              type="submit"
-              className="mt-2 w-full"
-              disabled={form.formState.isSubmitting}
-            >
-              {form.formState.isSubmitting ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : null}
+            <Button type="submit" className="mt-2 w-full" disabled={form.formState.isSubmitting}>
+              {form.formState.isSubmitting ? <Loader2 className="size-4 animate-spin" /> : null}
               {t("loginButton")}
             </Button>
           </form>
         </Form>
         <div className="relative">
           <Separator />
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-card px-2 text-xs uppercase tracking-wide text-muted-foreground">
+          <span className="bg-card text-muted-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-2 text-xs tracking-wide uppercase">
             {t("orContinueWith")}
           </span>
         </div>
         <GoogleSignInButton />
       </CardContent>
-      <CardFooter className="justify-center gap-1 text-sm text-muted-foreground">
+      <CardFooter className="text-muted-foreground justify-center gap-1 text-sm">
         <span>{t("noAccount")}</span>
         <Link
           href="/register"
-          className="font-medium text-foreground underline-offset-4 hover:underline"
+          className="text-foreground font-medium underline-offset-4 hover:underline"
         >
           {t("createOne")}
         </Link>
